@@ -38,9 +38,17 @@ import {
   Timer,
   LineChart,
   Github,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
 } from 'lucide-react';
 
 export const Icons = {
+  facebook: Facebook,
+  twitter: Twitter,
+  ig: Instagram,
+  in: Linkedin,
   close: X,
   checkCirle: CheckCircle,
   dashboard: LayoutDashboard,

@@ -6,7 +6,7 @@ import {
   NavbarItem,
 } from '@nextui-org/react';
 import { AcmeLogo } from './acme-logo';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { Link } from 'next-view-transitions';
 
 export default function GlobalNavbar() {

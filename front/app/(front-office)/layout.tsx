@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google"
-import "@/styles/globals.css"
- 
-import { cn } from "@/lib/utils"
-import GlobalNavbar from "@/components/global-navbar";
- 
+import type { Metadata } from 'next';
+import { Inter as FontSans } from 'next/font/google';
+import '@/styles/globals.css';
+
+import { cn } from '@/lib/utils';
+import GlobalNavbar from '@/components/global/global-navbar';
+import Footer from '@/components/global/footer';
+
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export default function FrontLayout({
   children,
@@ -16,17 +17,18 @@ export default function FrontLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          'min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
-				>
-					<GlobalNavbar />
-					{children}
-				</body>
+      >
+        <GlobalNavbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

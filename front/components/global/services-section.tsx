@@ -1,5 +1,5 @@
 import ServiceCard from './service-card';
-import { Icons } from './ui/icons';
+import { Icons } from '../ui/icons';
 import {
   Carousel,
   CarouselContent,
