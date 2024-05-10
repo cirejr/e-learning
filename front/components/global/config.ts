@@ -188,3 +188,32 @@ export const courses = [
       'https://img.freepik.com/photos-gratuite/robot-effectuant-travail-humain_23-2150911983.jpg?t=st=1715372830~exp=1715376430~hmac=ce8b3cf5aa931bee6a89e7bf1deeaa63cf4f0367bcaf1f753fce93beb0cf16e4&w=900',
   },
 ];
+
+export const tutors = [
+  {
+    userImage: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+    name: 'John Doe',
+    userRole: 'Mathematics Teacher',
+    supportingText: 'Passionate about helping students excel in mathematics.',
+  },
+  {
+    userImage: 'https://i.pravatar.cc/150?u=a04258a2462d826712d',
+    name: 'Alice Smith',
+    userRole: 'Science Teacher',
+    supportingText:
+      'Bringing science to life with exciting experiments and activities.',
+  },
+  {
+    userImage: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    name: 'Michael Johnson',
+    userRole: 'English Teacher',
+    supportingText:
+      "Dedicated to improving students' language skills through literature and writing.",
+  },
+  {
+    userImage: 'https://i.pravatar.cc/150?u=a04258114e29026302d',
+    name: 'Emily Wilson',
+    userRole: 'History Teacher',
+    supportingText: "Making history engaging and relevant to students' lives.",
+  },
+];

@@ -42,9 +42,11 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  ChevronRight,
 } from 'lucide-react';
 
 export const Icons = {
+  chevronRight: ChevronRight,
   facebook: Facebook,
   twitter: Twitter,
   ig: Instagram,

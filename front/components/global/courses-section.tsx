@@ -9,11 +9,13 @@ import {
 } from '../ui/carousel';
 import CourseCard from './course-card';
 import { courses } from './config';
+import { Button } from '../ui/button';
+import { Icons } from '../ui/icons';
+import { Link } from 'next-view-transitions';
 
 export default function CoursesSection() {
   return (
     <SectionWrapper
-      className='flex gap-3 flex-col items-center justify-center mb-6'
       title='Explore Programs'
       headTitle='Our Most Popular Class'
       description="Let's join our famous class, the knowledge provided will definitely be useful for you."
@@ -45,6 +47,19 @@ export default function CoursesSection() {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+      </div>
+      <div className='flex items-center justify-center w-full py-10'>
+        <Button
+          variant='ghost'
+          size={'lg'}
+          className='group bg-primary-foreground text-primary hover:text-primary'
+          asChild
+        >
+          <Link href='/courses'>
+            Explore All Programs
+            <Icons.chevronRight className='flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1' />
+          </Link>
+        </Button>
       </div>
     </SectionWrapper>
   );
