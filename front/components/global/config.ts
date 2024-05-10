@@ -125,3 +125,66 @@ export const usefullLinks: {
     ],
   },
 ];
+
+export const courses = [
+  {
+    title: 'Figma UI UX Design..',
+    description:
+      'Use Figma to get a job in UI Design, User Interface, User Experience design.',
+    hasEnrolled: 2001,
+    price: '17.84',
+    tag: 'design',
+    userName: 'Jane Cooper',
+    userImage: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/conception-medias-sociaux-realiste-du-telephone-studio_23-2151459562.jpg?t=st=1715367152~exp=1715370752~hmac=3b5ec02283a4b5648d35b67ceff96a3291f826ad31d7f924cb4b6700c9f443b4&w=740',
+  },
+  {
+    title: 'React Native Mobile App Development',
+    description:
+      'Learn how to build cross-platform mobile applications using React Native. Dive into the world of mobile app development with React Native.',
+    hasEnrolled: 1500,
+    price: '29.99',
+    tag: 'development',
+    userName: 'John Smith',
+    userImage: 'https://i.pravatar.cc/150?u=react-native',
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/conception-medias-sociaux-realiste-du-telephone-studio_23-2151459542.jpg?t=st=1715372603~exp=1715376203~hmac=a5423b6d15d3ce66eb31e75660870fdaa42bd0a6d35d40d89359ac65cd309158&w=740',
+  },
+  {
+    title: 'Python Programming for Beginners',
+    description:
+      'Start your journey into the world of programming with Python. Learn the fundamentals of Python programming from scratch.',
+    hasEnrolled: 3000,
+    price: '24.99',
+    tag: 'programming',
+    userName: 'Sarah Johnson',
+    userImage: 'https://i.pravatar.cc/150?u=python-programming',
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/rendering-3d-ordinateur-portable_23-2151004304.jpg?t=st=1715372698~exp=1715376298~hmac=183f002021156cf98749ee011f23cf6f3c2d2524d6d3a39c1ea5e8c70e82b337&w=826',
+  },
+  {
+    title: 'Digital Marketing Fundamentals',
+    description:
+      'Master the basics of digital marketing and explore various digital channels such as social media, email, and content marketing.',
+    hasEnrolled: 2500,
+    price: '19.99',
+    tag: 'marketing',
+    userName: 'Michael Lee',
+    userImage: 'https://i.pravatar.cc/150?u=digital-marketing',
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/vue-3d-homme-affaires_23-2150710000.jpg?t=st=1715372765~exp=1715376365~hmac=b203bb3e86b36070682484d5b1c3e19750daeee2fb7d5fde7c3aa0de9d33c88f&w=740',
+  },
+  {
+    title: 'Data Science and Machine Learning',
+    description:
+      'Dive deep into data science and machine learning. Learn how to analyze data, build predictive models, and extract insights.',
+    hasEnrolled: 2000,
+    price: '34.99',
+    tag: 'data-science',
+    userName: 'Emily Rodriguez',
+    userImage: 'https://i.pravatar.cc/150?u=data-science-machine-learning',
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/robot-effectuant-travail-humain_23-2150911983.jpg?t=st=1715372830~exp=1715376430~hmac=ce8b3cf5aa931bee6a89e7bf1deeaa63cf4f0367bcaf1f753fce93beb0cf16e4&w=900',
+  },
+];

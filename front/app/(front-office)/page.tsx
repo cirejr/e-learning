@@ -1,3 +1,4 @@
+import CoursesSection from '@/components/global/courses-section';
 import HeroSection from '@/components/global/hero-section';
 import Services from '@/components/global/services-section';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ export default function Home() {
     <main className=''>
       <HeroSection />
       <Services />
+      <CoursesSection />
     </main>
   );
 }

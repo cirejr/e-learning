@@ -46,7 +46,7 @@ export default function Services() {
   ];
   return (
     <>
-      <div className='container py-24 lg:py-32'>
+      <div className='container'>
         <div className='flex gap-3 flex-col items-center justify-center mb-6'>
           <p className='text-sm text-primary font-semibold'>Our Services</p>
           <p className='text-3xl font-bold'>

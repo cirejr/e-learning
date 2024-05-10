@@ -15,7 +15,7 @@ export default function HeroSection() {
   return (
     <>
       {/* Hero */}
-      <div className='container py-24 lg:py-32'>
+      <div className='container py-24'>
         {/* Grid */}
         <div className='grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center relative'>
           <div className='hidden md:block absolute top-0 end-0 -translate-y-12 translate-x-20'>
