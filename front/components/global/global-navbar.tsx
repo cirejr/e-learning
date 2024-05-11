@@ -1,10 +1,12 @@
 'use client';
 import React from 'react';
 import {
+  Chip,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  Link as NextLink,
 } from '@nextui-org/react';
 import { AcmeLogo } from './acme-logo';
 import { Button } from '../ui/button';
@@ -19,23 +21,59 @@ export default function GlobalNavbar() {
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         <NavbarItem isActive>
-          <Link color='foreground' href='#' aria-current='page'>
+          <Link color='foreground' href='/' aria-current='page'>
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href='#'>About us</Link>
+          <NextLink href='/about-us' isDisabled>
+            About us
+          </NextLink>
+          <Chip
+            size='sm'
+            variant='flat'
+            color='danger'
+            className='ml-1 translate-y-[-10px]'
+          >
+            soon
+          </Chip>
         </NavbarItem>
         <NavbarItem>
-          <Link href='#'>Courses</Link>
+          <NextLink href='/courses' isDisabled>
+            Courses
+          </NextLink>
+          <Chip
+            size='sm'
+            variant='flat'
+            color='danger'
+            className='ml-1 translate-y-[-10px]'
+          >
+            soon
+          </Chip>
         </NavbarItem>
         <NavbarItem>
-          <Link href='#'>Contact us</Link>
+          <NextLink href='/contact' isDisabled>
+            Contact us
+          </NextLink>
+          <Chip
+            size='sm'
+            variant='flat'
+            color='danger'
+            className='ml-1 translate-y-[-10px]'
+          >
+            soon
+          </Chip>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify='end'>
+      <NavbarContent justify='end' className='gap-2'>
         <NavbarItem className='hidden lg:flex'>
-          <Link href='/login'>Login</Link>
+          <Button
+            asChild
+            variant={'secondary'}
+            className='bg-primary-foreground text-primary '
+          >
+            <Link href='/login'>Login</Link>
+          </Button>
         </NavbarItem>
         <NavbarItem>
           <Button asChild>
