@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import '@/styles/globals.css';
 
@@ -17,18 +16,15 @@ export default function FrontLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable
-        )}
-      >
-        <GlobalNavbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <main
+      className={cn(
+        'min-h-screen bg-background font-sans antialiased',
+        fontSans.variable
+      )}
+    >
+      <GlobalNavbar />
+      {children}
+      <Footer />
+    </main>
   );
 }

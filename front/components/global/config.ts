@@ -1,3 +1,5 @@
+import { ArticleProps } from './article-card';
+
 export const usefullLinks: {
   headTitle: string;
   submenu: { title: string; href: string; description: string }[];
@@ -215,5 +217,54 @@ export const tutors = [
     name: 'Emily Wilson',
     userRole: 'History Teacher',
     supportingText: "Making history engaging and relevant to students' lives.",
+  },
+];
+export const articles: {
+  imageUrl: string;
+  createdAt: string;
+  title: string;
+  description: string;
+  tags: {
+    name: string;
+    color: 'success' | 'danger' | 'warning' | 'default';
+  }[];
+  isMobile?: boolean;
+  href: string;
+}[] = [
+  {
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/jeune-homme-est-assis-bureau-livres-dessus_1340-42779.jpg?t=st=1715431435~exp=1715435035~hmac=9725398517c3e1f7f7697996ed1b70f680986027cb6f7d7c483bb7f0526ca8cd&w=740',
+    createdAt: 'November 16, 2014',
+    description: 'Discover the Benefits of Online Learning',
+    tags: [
+      { name: 'Online Learning', color: 'success' },
+      { name: 'Education', color: 'default' },
+    ],
+    title: 'Unlock Your Potential: The Power of Lifelong Learning',
+    href: '/blog/1',
+  },
+  {
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/horloge-ancienne-bureau-antique-rappelle-etude-generee-par-ia_24640-90145.jpg?t=st=1715431585~exp=1715435185~hmac=07fa42c61074093ce3d5a2db6384a14d4ebcf2ff01de49f9cf5242f7bc3c21ed&w=826',
+    createdAt: 'October 22, 2019',
+    description: '5 Study Habits to Boost Your Academic Success',
+    tags: [
+      { name: 'Study Tips', color: 'warning' },
+      { name: 'Learning Strategies', color: 'danger' },
+    ],
+    title: 'Effective Learning Techniques Every Student Should Know',
+    href: '/blog/2',
+  },
+  {
+    imageUrl:
+      'https://img.freepik.com/photos-gratuite/bibliotheque-bois-dans-bibliotheque-moderne-environnement-parfait-pour-apprentissage-genere-par-intelligence-artificielle_24640-131320.jpg?t=st=1715433300~exp=1715436900~hmac=a1693bc773e815e970c9d7c0f76c3b2f09ad10de71947687e359d4def791fbb1&w=826',
+    createdAt: 'March 8, 2022',
+    description: 'How to Stay Motivated When Learning Online',
+    tags: [
+      { name: 'Motivation', color: 'danger' },
+      { name: 'Online Education', color: 'success' },
+    ],
+    title: 'Overcoming Challenges in Remote Learning: Strategies for Success',
+    href: '/blog/3',
   },
 ];

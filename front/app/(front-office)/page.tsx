@@ -1,3 +1,4 @@
+import BlogSection from '@/components/global/blog-section';
 import CoursesSection from '@/components/global/courses-section';
 import HeroSection from '@/components/global/hero-section';
 import Services from '@/components/global/services-section';
@@ -14,6 +15,7 @@ export default function Home() {
       <CoursesSection />
       <TeamMembers />
       <Testimony />
+      <BlogSection />
     </main>
   );
 }

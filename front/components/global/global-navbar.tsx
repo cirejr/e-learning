@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Navbar,
@@ -17,15 +18,13 @@ export default function GlobalNavbar() {
         <p className='font-bold text-inherit'>ACME</p>
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
+        <NavbarItem isActive>
+          <Link color='foreground' href='#' aria-current='page'>
             Home
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href='#' aria-current='page'>
-            About us
-          </Link>
+        <NavbarItem>
+          <Link href='#'>About us</Link>
         </NavbarItem>
         <NavbarItem>
           <Link href='#'>Courses</Link>
