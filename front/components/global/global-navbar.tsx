@@ -64,6 +64,9 @@ export default function GlobalNavbar() {
             soon
           </Chip>
         </NavbarItem>
+        <NavbarItem>
+          <Link href='/admin'>Dashboard</Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end' className='gap-2'>
         <NavbarItem className='hidden lg:flex'>
