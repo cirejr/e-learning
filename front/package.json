@@ -35,6 +35,7 @@
     "framer-motion": "^11.1.9",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.18",
     "next-nprogress-bar": "^2.3.11",
     "next-themes": "^0.3.0",
     "next-view-transitions": "^0.1.1",
