@@ -1,35 +1,56 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import Google from 'next-auth/providers/google';
+import { loginSchema } from './lib/form-schemas/login';
+import { ZodError } from 'zod';
 // Your own logic for dealing with plaintext password strings; be careful!
 /* import { saltAndHashPassword } from '@/utils/password'; */
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
+    Google,
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      credentials: {
+      credentials: { password: { label: 'Password', type: 'password' } },
+      authorize(c) {
+        if (c.password !== 'password') return null;
+        return {
+          id: 'test',
+          name: 'Ciré Ba',
+          email: 'test@example.com',
+        };
+      },
+      /* credentials: {
         email: {},
         password: {},
       },
       authorize: async (credentials) => {
-        let user = null;
+        try {
+          let user = null;
 
-        // logic to salt and hash password
-        const pwHash = saltAndHashPassword(credentials.password);
+          const { email, password } = await loginSchema.parseAsync(credentials);
 
-        // logic to verify if user exists
-        user = await getUserFromDb(credentials.email, pwHash);
+          // logic to salt and hash password
+          const pwHash = saltAndHashPassword(password);
 
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error('User not found.');
+          // logic to verify if user exists
+          user = await getUserFromDb(email, pwHash);
+
+          if (!user) {
+            throw new Error('User not found.');
+          }
+
+          // return json object with the user data
+          return user;
+        } catch (error) {
+          if (error instanceof ZodError) {
+            // Return `null` to indicate that the credentials are invalid
+            return null;
+          }
         }
-
-        // return user object with the their profile data
-        return user;
-      },
+      }, */
     }),
   ],
+  pages: {
+    signIn: '/login',
+  },
 });

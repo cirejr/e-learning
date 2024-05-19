@@ -18,19 +18,16 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <head />
-      <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased flex',
-          fontSans.variable
-        )}
-      >
-        <div className='container relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
-          <RightSide />
-          {children}
-        </div>
-      </body>
-    </html>
+    <main
+      className={cn(
+        'min-h-screen bg-background font-sans antialiased flex',
+        fontSans.variable
+      )}
+    >
+      <div className='container relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
+        <RightSide />
+        {children}
+      </div>
+    </main>
   );
 }

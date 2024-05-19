@@ -9,7 +9,7 @@ import { Link } from 'next-view-transitions';
 export default function LoginPage() {
   return (
     <>
-      <Link
+      {/* <Link
         href='/register'
         className={cn(
           buttonVariants({ variant: 'default' }),
@@ -17,7 +17,7 @@ export default function LoginPage() {
         )}
       >
         Register
-      </Link>
+      </Link> */}
 
       <div className='lg:p-8 flex items-center justify-center h-full'>
         <div className='mx-auto my-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
