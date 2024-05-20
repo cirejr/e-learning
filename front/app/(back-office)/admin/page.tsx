@@ -9,23 +9,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import MainContent from '@/components/dashboard/admin/main-content';
+import Breadcrumbs from '@/components/dashboard/breadcrumbs';
 
 export default function Dashboard() {
   return (
-    <ContentLayout title='Dashboard'>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href='/'>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Dashboard</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Dashboard'>
+      <MainContent />
     </ContentLayout>
   );
 }
