@@ -9,7 +9,7 @@ import { Link } from 'next-view-transitions';
 export default function LoginPage() {
   return (
     <>
-      <Link
+      {/* <Link
         href='/register'
         className={cn(
           buttonVariants({ variant: 'default' }),
@@ -17,16 +17,16 @@ export default function LoginPage() {
         )}
       >
         Register
-      </Link>
+      </Link> */}
 
-      <div className='lg:p-8 flex items-center justify-center h-full'>
+      <div className='lg:p-8 w-full flex items-center col-span-2 justify-center h-full dark bg-slate-900 text-primary-foreground'>
         <div className='mx-auto my-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
-          <div className='flex flex-col space-y-2 text-center'>
-            <h1 className='text-2xl font-semibold tracking-tight'>
-              Sign in to your account
+          <div className='flex flex-col space-y-2'>
+            <h1 className='text-4xl font-semibold tracking-tight text-white'>
+              Bienvenue
             </h1>
             <p className='text-sm text-muted-foreground'>
-              Enter your email below to log in
+              Connectez vous à votre compte
             </p>
           </div>
           <UserAuthForm />
