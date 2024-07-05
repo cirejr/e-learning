@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function CreateUser() {
   return (
-    <ContentLayout title='Create User'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Create User'>
       <Breadcrumbs />
     </ContentLayout>
   );

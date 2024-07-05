@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Account() {
   return (
-    <ContentLayout title='Account'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Account'>
       <Breadcrumbs />
     </ContentLayout>
   );

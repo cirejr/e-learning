@@ -58,8 +58,8 @@ export default function Footer() {
         <CardFooter className='justify-between'>
           <span>© 2022 Ed-Circle. All rights reserved.</span>
           <div className='flex items-center gap-2'>
-            {socialIcons.map((social) => (
-              <Button size='icon' className='rounded-full' asChild>
+            {socialIcons.map((social, index) => (
+              <Button key={index} size='icon' className='rounded-full' asChild>
                 <Link href={social.href}>{social.icon}</Link>
               </Button>
             ))}
