@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function ContentManagement() {
   return (
-    <ContentLayout title='Content Management'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Content Management'>
       <Breadcrumbs />
     </ContentLayout>
   );

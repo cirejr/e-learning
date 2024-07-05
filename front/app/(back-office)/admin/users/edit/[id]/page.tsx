@@ -4,7 +4,7 @@ import React from 'react';
 
 export default async function EditUser({ params }: { params: { id: number } }) {
   return (
-    <ContentLayout title='Edit User'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Edit User'>
       <Breadcrumbs />
     </ContentLayout>
   );

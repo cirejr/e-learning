@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Users() {
   return (
-    <ContentLayout title='Users'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Users'>
       <Breadcrumbs />
     </ContentLayout>
   );

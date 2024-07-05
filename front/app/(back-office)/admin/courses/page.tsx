@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Courses() {
   return (
-    <ContentLayout title='Courses'>
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Courses'>
       <Breadcrumbs />
     </ContentLayout>
   );

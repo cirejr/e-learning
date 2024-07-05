@@ -15,8 +15,8 @@ export default function Testimony() {
             <p className='font-bold text-6xl'>ACME</p>
           </div>
           <blockquote className='mt-6 border-l-2 pl-6 italic scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0'>
-            "After all," he said, "everyone enjoys a good joke, so it's only
-            fair that they should pay for the privilege."
+            &quot;After all,&quot; he said, &quot;everyone enjoys a good joke,
+            so it&apos;s only fair that they should pay for the privilege.&quot;
           </blockquote>
           <div className='flex flex-col items-center justify-center gap-2'>
             <Avatar

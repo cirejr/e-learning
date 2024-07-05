@@ -5,6 +5,7 @@ import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { Providers } from '@/providers/main-provider';
 import { ViewTransitions } from 'next-view-transitions';
+import { Toaster } from 'sonner';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -32,6 +33,7 @@ export default function RootLayout({
           )}
         >
           <Providers>{children}</Providers>
+          <Toaster closeButton richColors />
         </body>
       </html>
     </ViewTransitions>
