@@ -80,7 +80,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <Label htmlFor='password'>Password</Label>
             <Input
               id='password'
-              placeholder='********'
+              placeholder='•••••••'
               type='password'
               autoCapitalize='none'
               autoComplete='current-password'
