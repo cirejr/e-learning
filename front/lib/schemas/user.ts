@@ -12,8 +12,8 @@ export const userSchema = z.object({
   lastName: z.string({
     required_error: 'Veuillez saisir le prénom.',
   }),
-  type: z.string({
-    required_error: 'Veuillez choisir un type.',
+  role: z.enum(['admin', 'teacher', 'student'], {
+    required_error: 'Veuillez choisir un rôle.',
   }),
   password: z.string({
     required_error: 'Veuillez tapez le mot de passe.',

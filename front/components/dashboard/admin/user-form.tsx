@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,38 +21,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from '@/components/ui/use-toast';
-import { userSchema } from '@/lib/schemas/user';
 import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+import { createUser } from '@/lib/actions/user';
+import { userSchema } from '@/lib/schemas/user';
+import { createClient } from '@/utils/supabase/server';
+import { useRouter } from 'next/navigation';
+import { Icons } from '@/components/ui/icons';
 
-export function UserForm() {
+export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
     defaultValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      type: '',
+      email: user?.email || undefined,
+      firstName: user?.firstName || undefined,
+      lastName: user?.lastName || undefined,
+      password: user?.password || undefined,
+      role: user?.role || 'student',
     },
   });
 
-  function onSubmit(data: z.infer<typeof userSchema>) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(userData: z.infer<typeof userSchema>) {
+    setIsLoading(true);
+    console.log('userData', userData);
+    try {
+      const res = await createUser(userData);
+      console.log(res, 'res');
+      if (res.success) {
+        toast.success('Utilisateur créé avec succès');
+        router.push('/admin/users');
+      } else if (res.error) {
+        //@ts-ignore
+        toast.error(res.error.message as string);
+      }
+    } catch (error) {
+      toast.error(
+        "Une erreur est survenue lors de la création de l'utilisateur"
+      );
+    }
+    setIsLoading(false);
+    setIsOpen(false);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='w-[300px] space-y-6 '
+        className='w-auto space-y-6 '
       >
         <FormField
           control={form.control}
@@ -62,7 +79,7 @@ export function UserForm() {
             <FormItem>
               <FormLabel>Nom</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder='Nom' />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -76,7 +93,21 @@ export function UserForm() {
             <FormItem>
               <FormLabel>Prénom</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder='Prénom' />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name='email'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input {...field} type='email' placeholder='Email' />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +121,7 @@ export function UserForm() {
             <FormItem>
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
-                <Input {...field} type='password' />
+                <Input {...field} type='password' placeholder='Mot de passe' />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,10 +130,10 @@ export function UserForm() {
 
         <FormField
           control={form.control}
-          name='type'
+          name='role'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Type</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -110,16 +141,19 @@ export function UserForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='Administrateur'>Administrateur</SelectItem>
-                  <SelectItem value='Etudiant'>Etudiant</SelectItem>
-                  <SelectItem value='Professeur'>Professeur</SelectItem>
+                  <SelectItem value='admin'>Administrateur</SelectItem>
+                  <SelectItem value='student'>Etudiant</SelectItem>
+                  <SelectItem value='teacher'>Professeur</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' className='w-full'>
+          {isLoading && <Icons.loader className='mr-2 h-4 w-4 animate-spin' />}
+          Créer
+        </Button>
       </form>
     </Form>
   );
