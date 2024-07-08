@@ -34,7 +34,7 @@ export function getMenuList(pathname: string): Group[] {
         {
           href: '/admin',
           label: 'Dashboard',
-          active: pathname.includes('/admin'),
+          active: pathname === '/admin',
           icon: LayoutGrid,
           submenus: [],
         },
@@ -44,22 +44,11 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: 'Contents',
       menus: [
         {
-          href: '',
+          href: '/admin/users',
           label: 'users',
           active: pathname.includes('/users'),
           icon: Users,
-          submenus: [
-            {
-              href: '/admin/users',
-              label: 'All Users',
-              active: pathname === '/admin/users',
-            },
-            {
-              href: '/admin/users/create',
-              label: 'New User',
-              active: pathname === '/users/create',
-            },
-          ],
+          submenus: [],
         },
         {
           href: '',
