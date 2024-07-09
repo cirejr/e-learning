@@ -2,17 +2,28 @@ import React from 'react';
 
 import { ContentLayout } from '@/components/dashboard/content-layout';
 import Breadcrumbs from '@/components/dashboard/breadcrumbs';
-import ModalForm from '@/components/dashboard/modal-form';
+import UsersTable from '@/components/dashboard/tables/users/data-table';
+import { columns } from '@/components/dashboard/tables/users/columns';
+import { createClient } from '@/utils/supabase/server';
+import { User } from '@/lib/definitions/user';
 
-export default function Users() {
+async function getUsers() {
+  'use server';
+  const supabase = createClient();
+  try {
+    const response = await supabase.from('profiles').select('*');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export default async function UsersPage() {
+  const users = (await getUsers()) as unknown as User[];
   return (
-    <ContentLayout breadcrumb={<Breadcrumbs />} title='Users'>
-      <Breadcrumbs />
+    <ContentLayout breadcrumb={<Breadcrumbs />} title='Utilisateurs'>
       <main>
-        <h1>Liste des utilisateurs</h1>
-        <div>
-          <ModalForm />
-        </div>
+        <UsersTable columns={columns} data={users} />
       </main>
     </ContentLayout>
   );

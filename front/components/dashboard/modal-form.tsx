@@ -3,29 +3,41 @@
 import React from 'react';
 import {
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { UserForm } from './admin/user-form';
+import { Icons } from '../ui/icons';
+import { User } from '@/lib/definitions/user';
 
-export default function ModalForm({ user }: { user?: any }) {
+export default function ModalForm({
+  user,
+  buttonText = 'Ajouter utilisateur',
+  modalTitle = 'Ajouter un nouvel utilisateur',
+}: {
+  user?: User;
+  buttonText?: string;
+  modalTitle?: string;
+}) {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button>Ajouter utilisateur</Button>
+        <Button
+          variant={user ? 'ghost' : 'default'}
+          className={`${user && 'w-full flex justify-start px-2 font-normal'}`}
+        >
+          {!user && <Icons.plus className='mr-2' />}
+          {buttonText}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <div className='flex justify-between items-center'>
-            <AlertDialogTitle>Ajouter un nouvel utilisateur</AlertDialogTitle>
+            <AlertDialogTitle>{modalTitle}</AlertDialogTitle>
             <Button
               variant='ghost'
               className=' hover:bg-red-200 hover:text-red-500'
