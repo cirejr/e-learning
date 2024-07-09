@@ -37,8 +37,8 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
     resolver: zodResolver(userSchema),
     defaultValues: {
       email: user?.email || undefined,
-      firstName: user?.firstName || undefined,
-      lastName: user?.lastName || undefined,
+      firstName: user?.first_name || undefined,
+      lastName: user?.last_name || undefined,
       password: user?.password || undefined,
       role: user?.role || 'student',
     },

@@ -5,6 +5,7 @@ export type User = {
   lastName: string;
   status: string;
   role: 'admin' | 'teacher' | 'student';
+  password: string;
   createdAt: string;
   updatedAt: string;
 };

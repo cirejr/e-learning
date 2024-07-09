@@ -41,6 +41,7 @@ import {
 } from '@/components/ui/table';
 import { User } from '@/lib/definitions/user';
 import { DataTableColumnHeader } from '../data-table-column-header';
+import ModalForm from '../../modal-form';
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -66,6 +67,24 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: 'first_name',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Prénom' />
+    ),
+    cell: ({ row }) => (
+      <div className='lowercase'>{row.getValue('first_name')}</div>
+    ),
+  },
+  {
+    accessorKey: 'last_name',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Nom' />
+    ),
+    cell: ({ row }) => (
+      <div className='lowercase'>{row.getValue('last_name')}</div>
+    ),
+  },
+  {
     accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
@@ -83,7 +102,7 @@ export const columns: ColumnDef<User>[] = [
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const user = row.original;
 
       return (
         <DropdownMenu>
@@ -95,14 +114,14 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
+            <DropdownMenuItem asChild>
+              <ModalForm
+                buttonText='Modifier'
+                modalTitle='Modifier un utilisateur'
+                user={user}
+              />
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Supprimer</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

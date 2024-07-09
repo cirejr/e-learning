@@ -26,8 +26,11 @@ export default function ModalForm({
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
-        <Button>
-          <Icons.plus className='mr-2' />
+        <Button
+          variant={user ? 'ghost' : 'default'}
+          className={`${user && 'w-full flex justify-start px-2 font-normal'}`}
+        >
+          {!user && <Icons.plus className='mr-2' />}
           {buttonText}
         </Button>
       </AlertDialogTrigger>
