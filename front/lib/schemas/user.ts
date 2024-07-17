@@ -6,10 +6,10 @@ export const userSchema = z.object({
       required_error: 'Veuillez saisir votre email.',
     })
     .email(),
-  firstName: z.string({
+  first_name: z.string({
     required_error: 'Veuillez saisir le nom.',
   }),
-  lastName: z.string({
+  last_name: z.string({
     required_error: 'Veuillez saisir le prénom.',
   }),
   role: z.enum(['admin', 'teacher', 'student'], {

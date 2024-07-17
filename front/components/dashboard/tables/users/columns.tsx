@@ -30,42 +30,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { User } from '@/lib/definitions/user';
 import { DataTableColumnHeader } from '../data-table-column-header';
 import ModalForm from '../../modal-form';
+import { DeleteModal } from '../../delete-modal';
+import { deleteUser } from '@/lib/actions/user';
 
 export const columns: ColumnDef<User>[] = [
-  {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label='Select all'
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label='Select row'
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: 'first_name',
     header: ({ column }) => (
@@ -121,7 +92,9 @@ export const columns: ColumnDef<User>[] = [
                 user={user}
               />
             </DropdownMenuItem>
-            <DropdownMenuItem>Supprimer</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <DeleteModal deleteFn={() => deleteUser(user.id)} />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
