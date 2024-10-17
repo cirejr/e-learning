@@ -18,6 +18,7 @@ import { DataTableProps } from '@/lib/definitions/data-table';
 import { TableOptions } from './table-options';
 
 export function DataTableContent<TData, TValue>({
+  formType,
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -25,7 +26,7 @@ export function DataTableContent<TData, TValue>({
 
   return (
     <div>
-      <div className='flex justify-between items-center py-4'>
+      <div className='flex items-center justify-between py-4'>
         <Input
           placeholder='Filter emails...'
           value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
@@ -34,7 +35,7 @@ export function DataTableContent<TData, TValue>({
           }
           className='max-w-sm'
         />
-        <ModalForm />
+        <ModalForm formType={formType} />
       </div>
       <div className='rounded-md border'>
         <Table>

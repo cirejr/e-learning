@@ -23,7 +23,7 @@ export default async function UsersPage() {
   return (
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Utilisateurs'>
       <main>
-        <UsersTable columns={columns} data={users} />
+        <UsersTable columns={columns} data={users} formType='user' />
       </main>
     </ContentLayout>
   );

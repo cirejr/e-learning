@@ -1,120 +1,98 @@
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { BookOpen, Clock, BarChart, DollarSign, Calendar } from 'lucide-react'
+import { Calendar, Clock, Code, Link as LinkIcon, User } from 'lucide-react'
+import CourseCreationForm from "@/components/dashboard/course-form"
 
-// Mock data for a single course
-const course = {
-  id: 1,
-  title: "Introduction to React",
-  instructor: {
-    name: "Jane Doe",
-    avatar: "/placeholder.svg?height=100&width=100",
-    bio: "Senior Frontend Developer with 10+ years of experience"
-  },
-  category: "Web Development",
-  duration: "8 weeks",
-  level: "Beginner",
-  price: 99.99,
-  rating: 4.7,
-  enrolledStudents: 1234,
-  description: "Learn the fundamentals of React, including components, state management, and hooks. This course will give you a solid foundation to build modern web applications.",
-  syllabus: [
-    { week: 1, topic: "Introduction to React and JSX" },
-    { week: 2, topic: "Components and Props" },
-    { week: 3, topic: "State and Lifecycle" },
-    { week: 4, topic: "Handling Events and Conditional Rendering" },
-    { week: 5, topic: "Lists and Keys" },
-    { week: 6, topic: "Forms and Controlled Components" },
-    { week: 7, topic: "Hooks (useState, useEffect)" },
-    { week: 8, topic: "Building a Final Project" },
-  ],
-  nextStartDate: "2023-07-01"
+type Course = {
+  id: number
+  title: string
+  description: string
+  code: string
+  start_date: string
+  end_date: string
+  teacher_id: string
+  url?: string
 }
 
-export default function Component() {
-  return (
-    <div className="min-h-screen pt-16">
+// This would normally come from your data fetching logic
+const fakeCourse: Course = {
+  id: 1,
+  title: "Introduction to Journalism",
+  description: "Learn the basics of journalism and reporting. This fakeCourse covers fundamental principles of news gathering, writing, and ethical reporting. Students will develop critical thinking skills and learn to craft compelling stories across various media platforms.",
+  code: "JOUR101",
+  start_date: "2024-01-15",
+  end_date: "2024-05-30",
+  teacher_id: "550e8400-e29b-41d4-a716-446655440000",
+  url: "https://example.com/intro-to-journalism"
+}
 
-      <main className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-3xl">{course.title}</CardTitle>
-                  <CardDescription>
-                    <Badge className="mr-2">{course.category}</Badge>
-                    <span className="text-sm text-muted-foreground">
-                      <Clock className="mr-1 inline" size={16} />
-                      {course.duration}
-                    </span>
-                    <span className="ml-4 text-sm text-muted-foreground">
-                      <BarChart className="mr-1 inline" size={16} />
-                      {course.level}
-                    </span>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4">{course.description}</p>
-                  <div className="mb-4 flex items-center">
-                    <Avatar className="mr-4 h-10 w-10">
-                      <AvatarImage src={course.instructor.avatar} alt={course.instructor.name} />
-                      <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold">{course.instructor.name}</p>
-                      <p className="text-sm text-muted-foreground">{course.instructor.bio}</p>
-                    </div>
-                  </div>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="syllabus">
-                      <AccordionTrigger>Course Syllabus</AccordionTrigger>
-                      <AccordionContent>
-                        <ul className="list-disc pl-5">
-                          {course.syllabus.map((week) => (
-                            <li key={week.week} className="mb-2">
-                              <span className="font-semibold">Week {week.week}:</span> {week.topic}
-                            </li>
-                          ))}
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </div>
+export default async function CourseDetailPage({ params }: { params: { slug: string } }) {
+  //const { code } = params.slug
+
+
+  return (
+    <div className="p-8">
+      <Card className="mx-auto max-w-3xl">
+        <CardHeader>
+          <div className="flex items-start justify-between">
             <div>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Enroll in this course</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4 text-3xl font-bold">
-                    <DollarSign className="mr-1 inline" size={24} />
-                    {course.price.toFixed(2)}
-                  </p>
-                  <ul className="mb-4">
-                    <li className="mb-2 flex items-center">
-                      <BookOpen className="mr-2" size={16} />
-                      <span>{course.enrolledStudents} students enrolled</span>
-                    </li>
-                    <li className="mb-2 flex items-center">
-                      <Calendar className="mr-2" size={16} />
-                      <span>Starts on {new Date(course.nextStartDate).toLocaleDateString()}</span>
-                    </li>
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full">Enroll Now</Button>
-                </CardFooter>
-              </Card>
+              <CardTitle className="mb-2 text-3xl">{fakeCourse.title}</CardTitle>
+              <CardDescription className="text-lg">{fakeCourse.code}</CardDescription>
             </div>
           </div>
-        </div>
-      </main>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <h3 className="mb-2 text-lg font-semibold">Description</h3>
+            <p className="text-gray-700">{fakeCourse.description}</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center">
+              <Calendar className="mr-2 h-4 w-4 text-gray-500" />
+              <span>Start Date: {new Date(fakeCourse.start_date).toLocaleDateString()}</span>
+            </div>
+            <div className="flex items-center">
+              <Calendar className="mr-2 h-4 w-4 text-gray-500" />
+              <span>End Date: {new Date(fakeCourse.end_date).toLocaleDateString()}</span>
+            </div>
+            <div className="flex items-center">
+              <Clock className="mr-2 h-4 w-4 text-gray-500" />
+              <span>Duration: {Math.ceil((new Date(fakeCourse.end_date).getTime() - new Date(fakeCourse.start_date).getTime()) / (1000 * 3600 * 24 * 7))} weeks</span>
+            </div>
+            <div className="flex items-center">
+              <Code className="mr-2 h-4 w-4 text-gray-500" />
+              <span>Course Code: {fakeCourse.code}</span>
+            </div>
+          </div>
+          {fakeCourse.url && (
+            <div className="flex items-center">
+              <LinkIcon className="mr-2 h-4 w-4 text-gray-500" />
+              <a href={fakeCourse.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                Course Website
+              </a>
+            </div>
+          )}
+          <div className="flex items-center">
+            <User className="mr-2 h-4 w-4 text-gray-500" />
+            <span>Teacher ID: {fakeCourse.teacher_id}</span>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <div className="flex items-center">
+            <Avatar className="mr-4 h-10 w-10">
+              <AvatarImage src="/placeholder.svg?height=40&width=40" alt="Teacher" />
+              <AvatarFallback>TC</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-medium">Teacher Name</p>
+              <p className="text-sm text-gray-500">teacher@example.com</p>
+            </div>
+          </div>
+        </CardFooter>
+      </Card>
     </div>
   )
 }
