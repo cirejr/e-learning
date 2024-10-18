@@ -9,7 +9,6 @@ import {
 } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -83,7 +82,7 @@ export const columns: ColumnDef<Course>[] = [
   {
     accessorKey: 'teacher_id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Teacher ID' />
+      <DataTableColumnHeader column={column} title='Teacher' />
     ),
     cell: ({ row }) => (
       <div>{row.getValue('teacher_id')}</div>

@@ -20,6 +20,7 @@ async function getUsers() {
 
 export default async function UsersPage() {
   const users = (await getUsers()) as unknown as User[];
+  console.log("users:", users)
   return (
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Utilisateurs'>
       <main>

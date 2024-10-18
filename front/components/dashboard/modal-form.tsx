@@ -13,18 +13,20 @@ import { UserForm } from './admin/user-form';
 import { Icons } from '../ui/icons';
 import { User } from '@/lib/definitions/user';
 import { Course } from '@/lib/definitions/course';
-import CourseCreationForm from './course-form';
+import CourseCreationForm from './create-course-form';
 
 type ModalFormProps = {
   user?: User;
   course?: Course;
   formType: 'user' | 'course';
+  teachers?: User[]
 };
 
 export default function ModalForm({
   user,
   course,
   formType,
+  teachers = []
 }: ModalFormProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -55,7 +57,7 @@ export default function ModalForm({
           {formType === 'user' ? (
             <UserForm user={user} setIsOpen={setIsOpen} />
           ) : (
-            <CourseCreationForm course={course} />
+            <CourseCreationForm teachers={teachers} course={course} />
           )}
         </AlertDialogHeader>
       </AlertDialogContent>

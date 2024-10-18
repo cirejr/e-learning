@@ -12,3 +12,13 @@ export function truncateText(text: string, maxLength: number) {
     return text.substring(0, maxLength) + '...';
   }
 }
+
+export function generateCourseCode(title: string) {
+  return title
+    .toLowerCase() 
+    .trim() 
+    .replace(/[^\w\s-]/g, '') 
+    .replace(/\s+/g, '-')   
+    .replace(/--+/g, '-'); 
+}
+

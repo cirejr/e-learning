@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Calendar, Clock, Code, Link as LinkIcon, User } from 'lucide-react'
-import CourseCreationForm from "@/components/dashboard/course-form"
+import CourseCreationForm from "@/components/dashboard/create-course-form"
 
 type Course = {
   id: number

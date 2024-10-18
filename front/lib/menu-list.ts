@@ -51,42 +51,24 @@ export function getMenuList(pathname: string): Group[] {
           submenus: [],
         },
         {
-          href: '',
+          href: '/admin/courses',
           label: 'Courses',
           active: pathname.includes('/courses'),
           icon: Bookmark,
-          submenus: [
-            {
-              href: '/admin/courses',
-              label: 'All Courses',
-              active: pathname === '/admin/courses',
-            },
-            {
-              href: '/admin/courses/create',
-              label: 'New Course',
-              active: pathname === '/admin/courses/create',
-            },
-          ],
+          submenus: [],
         },
-        {
+        /* {
           href: '/admin/content-management',
           label: 'Content Management',
           active: pathname.includes('/content-management'),
           icon: Tag,
           submenus: [],
-        },
+        }, */
       ],
     },
-    {
+   /*  {
       groupLabel: 'Settings',
       menus: [
-        /* {
-          href: '/users',
-          label: 'Users',
-          active: pathname.includes('/users'),
-          icon: Users,
-          submenus: [],
-        }, */
         {
           href: '/admin/account',
           label: 'Account',
@@ -95,6 +77,6 @@ export function getMenuList(pathname: string): Group[] {
           submenus: [],
         },
       ],
-    },
+    }, */
   ];
 }

@@ -21,6 +21,7 @@ export function DataTableContent<TData, TValue>({
   formType,
   columns,
   data,
+  teachers
 }: DataTableProps<TData, TValue>) {
   const table = TableOptions({ columns, data });
 
@@ -35,7 +36,7 @@ export function DataTableContent<TData, TValue>({
           }
           className='max-w-sm'
         />
-        <ModalForm formType={formType} />
+        <ModalForm formType={formType} teachers={teachers} />
       </div>
       <div className='rounded-md border'>
         <Table>
