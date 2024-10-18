@@ -23,9 +23,8 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { createUser } from '@/lib/actions/user';
+import { createUser, updateUser } from '@/lib/actions/user';
 import { userSchema } from '@/lib/schemas/user';
-import { createClient } from '@/utils/supabase/server';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/icons';
 
@@ -37,8 +36,8 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
     resolver: zodResolver(userSchema),
     defaultValues: {
       email: user?.email || undefined,
-      firstName: user?.first_name || undefined,
-      lastName: user?.last_name || undefined,
+      first_name: user?.first_name || undefined,
+      last_name: user?.last_name || undefined,
       password: user?.password || undefined,
       role: user?.role || 'student',
     },
@@ -48,10 +47,16 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
     setIsLoading(true);
     console.log('userData', userData);
     try {
-      const res = await createUser(userData);
-      console.log(res, 'res');
+      let res;
+      if (user) {
+        res = await updateUser(user.id, userData);
+      } else {
+        res = await createUser(userData);
+      }
       if (res.success) {
-        toast.success('Utilisateur créé avec succès');
+        toast.success(
+          user ? 'informations mis à jour' : 'Utilisateur créé avec succès'
+        );
         router.push('/admin/users');
       } else if (res.error) {
         //@ts-ignore
@@ -59,7 +64,9 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
       }
     } catch (error) {
       toast.error(
-        "Une erreur est survenue lors de la création de l'utilisateur"
+        user
+          ? 'Une erreur est survenue lors de la mis à jour des informations'
+          : "Une erreur est survenue lors de la création de l'utilisateur"
       );
     }
     setIsLoading(false);
@@ -74,7 +81,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
       >
         <FormField
           control={form.control}
-          name='firstName'
+          name='first_name'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nom</FormLabel>
@@ -88,7 +95,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
 
         <FormField
           control={form.control}
-          name='lastName'
+          name='last_name'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Prénom</FormLabel>
@@ -152,7 +159,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
         />
         <Button type='submit' className='w-full'>
           {isLoading && <Icons.loader className='mr-2 h-4 w-4 animate-spin' />}
-          Créer
+          {user ? 'Modifier' : 'Créer'}
         </Button>
       </form>
     </Form>

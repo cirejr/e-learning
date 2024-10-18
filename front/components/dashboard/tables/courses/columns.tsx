@@ -2,25 +2,13 @@
 
 import * as React from 'react';
 import {
-  CaretSortIcon,
-  ChevronDownIcon,
   DotsHorizontalIcon,
 } from '@radix-ui/react-icons';
 import {
   ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
 } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -30,50 +18,81 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { User } from '@/lib/definitions/user';
 import { DataTableColumnHeader } from '../data-table-column-header';
 import ModalForm from '../../modal-form';
 import { DeleteModal } from '../../delete-modal';
-import { deleteUser } from '@/lib/actions/user';
+import { Course } from '@/lib/definitions/course';
+import { deleteCourse } from '@/lib/actions/course';
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Course>[] = [
   {
-    accessorKey: 'first_name',
+    accessorKey: 'title',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Prénom' />
+      <DataTableColumnHeader column={column} title='Title' />
     ),
     cell: ({ row }) => (
-      <div className='lowercase'>{row.getValue('first_name')}</div>
+      <div>{row.getValue('title')}</div>
     ),
   },
   {
-    accessorKey: 'last_name',
+    accessorKey: 'description',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Nom' />
+      <DataTableColumnHeader column={column} title='Description' />
     ),
     cell: ({ row }) => (
-      <div className='lowercase'>{row.getValue('last_name')}</div>
+      <div>{row.getValue('description')}</div>
     ),
   },
   {
-    accessorKey: 'email',
+    accessorKey: 'url',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Email' />
+      <DataTableColumnHeader column={column} title='URL' />
     ),
-    cell: ({ row }) => <div className='lowercase'>{row.getValue('email')}</div>,
+    cell: ({ row }) => (
+      <div>{row.getValue('url')}</div>
+    ),
   },
   {
-    accessorKey: 'role',
+    accessorKey: 'code',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Type' />
+      <DataTableColumnHeader column={column} title='Code' />
     ),
-    cell: ({ row }) => <div className='lowercase'>{row.getValue('role')}</div>,
+    cell: ({ row }) => (
+      <div>{row.getValue('code')}</div>
+    ),
+  },
+  {
+    accessorKey: 'start_date',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Start Date' />
+    ),
+    cell: ({ row }) => (
+      <div>{row.getValue('start_date')}</div>
+    ),
+  },
+  {
+    accessorKey: 'end_date',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='End Date' />
+    ),
+    cell: ({ row }) => (
+      <div>{row.getValue('end_date')}</div>
+    ),
+  },
+  {
+    accessorKey: 'teacher_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Teacher' />
+    ),
+    cell: ({ row }) => (
+      <div>{row.getValue('teacher_id')}</div>
+    ),
   },
   {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const user = row.original;
+      const course = row.original;
 
       return (
         <DropdownMenu>
@@ -87,12 +106,12 @@ export const columns: ColumnDef<User>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild>
               <ModalForm
-                formType='user'
-                user={user}
+                formType='course'
+                course={course}
               />
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <DeleteModal deleteFn={() => deleteUser(user.id)} />
+              <DeleteModal deleteFn={() => deleteCourse(course.id)} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -100,3 +119,4 @@ export const columns: ColumnDef<User>[] = [
     },
   },
 ];
+
