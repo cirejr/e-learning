@@ -13,7 +13,7 @@ type Submenu = {
   active: boolean;
 };
 
-type Menu = {
+export type Menu = {
   href: string;
   label: string;
   active: boolean;
@@ -21,7 +21,7 @@ type Menu = {
   submenus: Submenu[];
 };
 
-type Group = {
+export type Group = {
   groupLabel: string;
   menus: Menu[];
 };
@@ -29,7 +29,7 @@ type Group = {
 export function getMenuList(pathname: string): Group[] {
   return [
     {
-      groupLabel: '',
+      groupLabel: 'Contents',
       menus: [
         {
           href: '/admin',
@@ -38,11 +38,6 @@ export function getMenuList(pathname: string): Group[] {
           icon: LayoutGrid,
           submenus: [],
         },
-      ],
-    },
-    {
-      groupLabel: 'Contents',
-      menus: [
         {
           href: '/admin/users',
           label: 'users',
@@ -66,7 +61,7 @@ export function getMenuList(pathname: string): Group[] {
         }, */
       ],
     },
-   /*  {
+    /*  {
       groupLabel: 'Settings',
       menus: [
         {
