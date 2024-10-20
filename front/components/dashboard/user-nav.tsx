@@ -23,7 +23,6 @@ import {
 import { logout } from '@/data-access/data';
 
 export function UserNav({ user }: { user: any }) {
-  console.log('user:', user);
   return (
     <DropdownMenu>
       <TooltipProvider disableHoverableContent>

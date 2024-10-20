@@ -8,7 +8,6 @@ import { Course } from '@/lib/definitions/course';
 import { User } from '@/lib/definitions/user';
 
 export default async function Courses() {
-  //const courses = await getCourses() as unknown as Course[]
   const [teachers, courses] = (await Promise.all([
     getTeachers(),
     getCourses(),
@@ -17,15 +16,47 @@ export default async function Courses() {
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Courses'>
       {(user) => (
         <main>
-          <div>{user.user.role}</div>
-          <DataTableContent
-            columns={columns}
-            data={courses}
-            formType='course'
-            teachers={teachers}
-          />
+          {user.user.role == 'teacher' ? (
+            <TeacherCourses teachers={teachers} courses={courses} />
+          ) : (
+            <StudentCourses teachers={teachers} courses={[]} />
+          )}
         </main>
       )}
     </ContentLayout>
+  );
+}
+
+function TeacherCourses({
+  courses,
+  teachers,
+}: {
+  courses: Course[];
+  teachers: User[];
+}) {
+  return (
+    <DataTableContent
+      columns={columns}
+      data={courses}
+      formType='course'
+      teachers={teachers}
+    />
+  );
+}
+
+function StudentCourses({
+  courses,
+  teachers,
+}: {
+  courses: Course[];
+  teachers: User[];
+}) {
+  return (
+    <DataTableContent
+      columns={columns}
+      data={courses}
+      formType='course'
+      teachers={teachers}
+    />
   );
 }

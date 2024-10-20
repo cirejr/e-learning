@@ -42,8 +42,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (res.success) {
       toast.success('connecté(e)');
 
-      console.log('user:', res.user);
-
       // Check the user's role
       if (res.user?.role === 'admin') {
         router.push('/admin');

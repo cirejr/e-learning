@@ -45,7 +45,6 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
 
   async function onSubmit(userData: z.infer<typeof userSchema>) {
     setIsLoading(true);
-    console.log('userData', userData);
     try {
       let res;
       if (user) {
@@ -77,7 +76,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='w-auto space-y-6 '
+        className='w-auto space-y-6'
       >
         <FormField
           control={form.control}
