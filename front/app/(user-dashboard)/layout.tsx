@@ -1,6 +1,5 @@
 import { AppSidebar } from '@/components/dashboard/sidebar/app-sidebar';
-import { SidebarLayout, SidebarTrigger } from '@/components/ui/sidebar';
-import { getUser } from '@/data-access/data';
+import { SidebarLayout } from '@/components/ui/sidebar';
 
 export default async function DashboardLayout({
   children,

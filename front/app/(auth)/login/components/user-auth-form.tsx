@@ -37,21 +37,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     formData.append('email', data.email);
     formData.append('password', data.password);
 
-    try {
-      const res = await login(formData);
-      if (res.success) {
-        toast.success('connecté(e)');
+    const res = await login(formData);
+
+    if (res.success) {
+      toast.success('connecté(e)');
+
+      console.log('user:', res.user);
+
+      // Check the user's role
+      if (res.user?.role === 'admin') {
         router.push('/admin');
-      } else if (res.error)
-        toast.error(
-          res.error === 'Invalid login credentials'
-            ? 'Identifiants de connexion incorrects'
-            : res.error
-        );
-    } catch (error) {
-      toast.error('une erreur est survenue veuillez ressayer');
-    } finally {
-      setIsLoading(false);
+      } else {
+        router.push('/dashboard');
+      }
+    } else if (res.error) {
+      toast.error(
+        res.error === 'Invalid login credentials'
+          ? 'Identifiants de connexion incorrects'
+          : res.error
+      );
     }
   });
 
@@ -69,11 +73,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoComplete='email'
               autoCorrect='off'
               disabled={isLoading}
-              className='text-white bg-slate-800 border border-slate-700'
+              className='border border-slate-700 bg-slate-800 text-white'
               {...register('email')}
             />
             {errors.email && (
-              <p className='text-red-500 text-sm'>{errors.email.message}</p>
+              <p className='text-sm text-red-500'>{errors.email.message}</p>
             )}
           </div>
           <div className='grid gap-3'>
@@ -86,17 +90,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoComplete='current-password'
               autoCorrect='off'
               disabled={isLoading}
-              className='text-white bg-slate-800 border border-slate-700'
+              className='border border-slate-700 bg-slate-800 text-white'
               {...register('password')}
             />
             {errors.password && (
-              <p className='text-red-500 text-sm'>{errors.password.message}</p>
+              <p className='text-sm text-red-500'>{errors.password.message}</p>
             )}
           </div>
           <Button
             disabled={isLoading}
             size='lg'
-            className='text-white border-indigo-600/75 border-2 bg-indigo-800 hover:bg-indigo-600 hover:border-indigo-500/75'
+            className='border-2 border-indigo-600/75 bg-indigo-800 text-white hover:border-indigo-500/75 hover:bg-indigo-600'
           >
             {isLoading && (
               <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />

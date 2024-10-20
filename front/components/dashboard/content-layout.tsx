@@ -2,14 +2,12 @@ import { Navbar } from '@/components/dashboard/navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { ClassValue } from 'clsx';
 import { cn } from '@/lib/utils';
-import { SidebarTrigger } from '../ui/sidebar';
-import { createClient } from '@/utils/supabase/client';
-import { User } from '@supabase/supabase-js';
+import { getUserData } from '@/data-access/data';
 
 interface ContentLayoutProps {
   breadcrumb: React.ReactNode;
   title: string;
-  children: React.ReactNode;
+  children: React.ReactNode | ((user: any) => React.ReactNode);
   className?: ClassValue;
 }
 
@@ -19,17 +17,19 @@ export async function ContentLayout({
   children,
   className,
 }: ContentLayoutProps) {
-  const supabase = createClient();
-  const user = (await supabase.auth.getUser()) as unknown as User;
+  const user = await getUserData();
 
   return (
     <div>
+      {/* @ts-ignore */}
       <Navbar breadcrumb={breadcrumb} user={user} />
       <Card className={cn('rounded-none border-none min-h-screen', className)}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
-        <CardContent>{children}</CardContent>
+        <CardContent>
+          {typeof children === 'function' ? children(user) : children}
+        </CardContent>
       </Card>
     </div>
   );

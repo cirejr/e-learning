@@ -15,14 +15,17 @@ export default async function Courses() {
   ])) as [User[], Course[]];
   return (
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Courses'>
-      <main>
-        <DataTableContent
-          columns={columns}
-          data={courses}
-          formType='course'
-          teachers={teachers}
-        />
-      </main>
+      {(user) => (
+        <main>
+          <div>{user.user.role}</div>
+          <DataTableContent
+            columns={columns}
+            data={courses}
+            formType='course'
+            teachers={teachers}
+          />
+        </main>
+      )}
     </ContentLayout>
   );
 }

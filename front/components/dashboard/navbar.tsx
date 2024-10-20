@@ -3,7 +3,7 @@ import { UserNav } from '@/components/dashboard/user-nav';
 import { SheetMenu } from '@/components/dashboard/sheet-menu';
 import { SidebarTrigger } from '../ui/sidebar';
 import { NavUser } from './sidebar/nav-user';
-import { User } from '@supabase/supabase-js';
+import { User } from '@/lib/definitions/user';
 
 interface NavbarProps {
   breadcrumb: React.ReactNode;
@@ -20,7 +20,7 @@ export function Navbar({ breadcrumb, user }: NavbarProps) {
         </div>
         <div className='flex flex-1 items-center justify-end space-x-2'>
           <ModeToggle />
-          <UserNav />
+          <UserNav user={user as User} />
         </div>
       </div>
     </header>

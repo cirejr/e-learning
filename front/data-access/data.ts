@@ -1,22 +1,45 @@
 'use server';
 
 import { createClient } from '@/utils/supabase/server';
-import { createClient as createClientCSR } from '@/utils/supabase/server';
 
-const supabasessr = createClient();
-const supabasecsr = createClientCSR();
+const supabase = createClient();
 
-export async function getUser() {
-  const res = await supabasecsr.auth.getUser();
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
 
-  if (res.error) {
-    return res.error;
+  if (error) {
+    throw error;
   }
-  return res.data;
 }
 
-export async function getSession() {
-  const res = await supabasecsr.auth.getSession();
+export async function getUserData() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    return null;
+  }
+
+  const { data: userData, error } = await supabase
+    .from('profiles')
+    .select()
+    .eq('id', session.user.id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching user role:', error);
+    return session.user;
+  }
+
+  return {
+    ...session.user,
+    user: userData,
+  };
+}
+
+export async function getUser() {
+  const res = await supabase.auth.getUser();
 
   if (res.error) {
     return res.error;
@@ -26,7 +49,7 @@ export async function getSession() {
 
 export async function getCourses() {
   try {
-    const response = await supabasessr.from('courses').select('*');
+    const response = await supabase.from('courses').select('*');
     return response.data;
   } catch (error) {
     return error;
@@ -34,13 +57,14 @@ export async function getCourses() {
 }
 
 export async function getTeachers() {
-  try {
-    const response = await supabasessr
-      .from('profiles')
-      .select()
-      .eq('role', 'teacher');
-    return response.data;
-  } catch (error) {
+  const { error, data } = await supabase
+    .from('profiles')
+    .select()
+    .eq('role', 'teacher');
+
+  if (error) {
     throw error;
   }
+
+  return data;
 }
