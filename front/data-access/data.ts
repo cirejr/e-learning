@@ -14,27 +14,27 @@ export async function logout() {
 
 export async function getUserData() {
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     return null;
   }
 
   const { data: userData, error } = await supabase
     .from('profiles')
     .select()
-    .eq('id', session.user.id)
+    .eq('id', user.id)
     .single();
 
   if (error) {
     console.error('Error fetching user role:', error);
-    return session.user;
+    return user;
   }
 
   return {
-    ...session.user,
-    user: userData,
+    ...user,
+    profile: userData,
   };
 }
 
