@@ -4,10 +4,15 @@ import { z } from 'zod';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { courseSchema } from '../schemas/course';
+import { generateCourseCode } from '../utils';
 
 const supabase = createClient();
 
 export async function createCourse(courseData: z.infer<typeof courseSchema>) {
+  const dataToSend = {
+    code: generateCourseCode(courseData.title),
+    ...courseData,
+  };
   try {
     const { data, error } = await supabase
       .from('courses')
@@ -15,7 +20,7 @@ export async function createCourse(courseData: z.infer<typeof courseSchema>) {
         title: courseData.title,
         description: courseData.description,
         url: courseData.url,
-        code: courseData.code,
+        code: dataToSend?.code,
         start_date: courseData.start_date,
         end_date: courseData.end_date,
         teacher_id: courseData.teacher_id,
@@ -37,6 +42,10 @@ export async function updateCourse(
   courseId: number,
   courseData: z.infer<typeof courseSchema>
 ) {
+  const dataToSend = {
+    code: generateCourseCode(courseData.title),
+    ...courseData,
+  };
   try {
     const response = await supabase
       .from('courses')
@@ -44,7 +53,7 @@ export async function updateCourse(
         title: courseData.title,
         description: courseData.description,
         url: courseData.url,
-        code: courseData.code,
+        code: dataToSend.code,
         start_date: courseData.start_date,
         end_date: courseData.end_date,
         teacher_id: courseData.teacher_id,
@@ -65,10 +74,7 @@ export async function updateCourse(
 
 export async function deleteCourse(courseId: number) {
   try {
-    const res = await supabase
-      .from('courses')
-      .delete()
-      .eq('id', courseId);
+    const res = await supabase.from('courses').delete().eq('id', courseId);
 
     return res;
   } catch (error) {
@@ -77,4 +83,3 @@ export async function deleteCourse(courseId: number) {
     revalidatePath('/admin/courses', 'page');
   }
 }
-

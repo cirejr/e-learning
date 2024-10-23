@@ -32,8 +32,8 @@ export default function Contact() {
         <div className='mb-16 text-center'>
           <h2 className='mb-4 text-4xl font-bold text-primary'>Contact Us</h2>
           <p className='mx-auto max-w-3xl text-xl text-muted-foreground'>
-            Have questions or feedback? We'd love to hear from you. Reach out to
-            us using the form below or through our contact information.
+            Have questions or feedback? We&apos;d love to hear from you. Reach
+            out to us using the form below or through our contact information.
           </p>
         </div>
 

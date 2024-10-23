@@ -71,16 +71,13 @@ export default function CourseCreationForm({
   const onSubmit = async (data: CourseFormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
-    const dataToSend = {
-      code: generateCourseCode(data.title),
-      ...data,
-    };
+
     try {
       let res;
       if (course) {
-        res = await updateCourse(course.id, dataToSend);
+        res = await updateCourse(course.id, data);
       } else {
-        res = await createCourse(dataToSend);
+        res = await createCourse(data);
       }
       if (res.success) {
         toast.success(
@@ -330,6 +327,7 @@ export default function CourseCreationForm({
                 <SelectContent>
                   {teachers.map((teach) => (
                     <SelectItem
+                      key={teach.id}
                       className='capitalize'
                       id={teach.id}
                       value={teach.id}

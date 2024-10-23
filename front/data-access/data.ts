@@ -2,9 +2,8 @@
 
 import { createClient } from '@/utils/supabase/server';
 
-const supabase = createClient();
-
 export async function logout() {
+  const supabase = createClient();
   const { error } = await supabase.auth.signOut();
 
   if (error) {
@@ -13,6 +12,8 @@ export async function logout() {
 }
 
 export async function getUserData() {
+  const supabase = createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -39,6 +40,8 @@ export async function getUserData() {
 }
 
 export async function getUser() {
+  const supabase = createClient();
+
   const res = await supabase.auth.getUser();
 
   if (res.error) {
@@ -48,6 +51,8 @@ export async function getUser() {
 }
 
 export async function getCourses() {
+  const supabase = createClient();
+
   try {
     const response = await supabase.from('courses').select('*');
     return response.data;
@@ -57,6 +62,8 @@ export async function getCourses() {
 }
 
 export async function getTeachers() {
+  const supabase = createClient();
+
   const { error, data } = await supabase
     .from('profiles')
     .select()
