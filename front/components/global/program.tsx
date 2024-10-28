@@ -3,31 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Icons } from '../ui/icons';
+import getPrograms from '@/data-access/programs';
 
-const programs = [
-  {
-    title: 'Journalisme',
-    description:
-      "Maîtrisez l'art du storytelling et du reportage sur plusieurs plateformes.",
-    image:
-      'https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    title: 'Médias numériques',
-    description: "Apprenez à créer et gérer du contenu à l'ère numérique.",
-    image:
-      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    title: 'Diffusion',
-    description:
-      'Développez des compétences en production télévisuelle, radiophonique et de podcasts.',
-    image:
-      'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-];
-
-export function Programs() {
+export async function Programs() {
+  const programs = await getPrograms();
   return (
     <section className='bg-muted py-24'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -46,7 +25,7 @@ export function Programs() {
             <Card key={index} className='overflow-hidden'>
               <div className='relative aspect-video'>
                 <img
-                  src={program.image}
+                  src={program.image_url}
                   alt={program.title}
                   className='absolute inset-0 h-full w-full object-cover'
                 />
