@@ -1,5 +1,5 @@
-import ServiceCard from './service-card';
-import { Icons } from '../ui/icons';
+import ServiceCard from '@/app/(template)/template/_components/service-card';
+import { Icons } from '@/components/ui/icons';
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,7 @@ export default function Services() {
       cardTitle: 'Interaction Design',
       cardContent: 'Lessons on design that cover the most recent developments.',
       icon: (
-        <Icons.responsive className='flex-shrink-0 w-6 h-6 text-primary-foreground' />
+        <Icons.responsive className='h-6 w-6 flex-shrink-0 text-primary-foreground' />
       ),
       href: '#',
     },
@@ -22,7 +22,7 @@ export default function Services() {
       cardTitle: 'UX Design Course',
       cardContent: 'Lessons on design that cover the most recent developments.',
       icon: (
-        <Icons.moniter className='flex-shrink-0 w-6 h-6 text-primary-foreground' />
+        <Icons.moniter className='h-6 w-6 flex-shrink-0 text-primary-foreground' />
       ),
       href: '#',
     },
@@ -31,7 +31,7 @@ export default function Services() {
       cardContent:
         'User Interface Design courses that cover the most recent  trends',
       icon: (
-        <Icons.linechart className='flex-shrink-0 w-6 h-6 text-primary-foreground' />
+        <Icons.linechart className='h-6 w-6 flex-shrink-0 text-primary-foreground' />
       ),
       href: '#',
     },
@@ -39,7 +39,7 @@ export default function Services() {
       cardTitle: 'UX Design Course',
       cardContent: 'Lessons on design that cover the most recent developments.',
       icon: (
-        <Icons.moniter className='flex-shrink-0 w-6 h-6 text-primary-foreground' />
+        <Icons.moniter className='h-6 w-6 flex-shrink-0 text-primary-foreground' />
       ),
       href: '#',
     },
@@ -47,8 +47,8 @@ export default function Services() {
   return (
     <>
       <div className='container'>
-        <div className='flex gap-3 flex-col items-center justify-center mb-6'>
-          <p className='text-sm text-primary font-semibold'>Our Services</p>
+        <div className='mb-6 flex flex-col items-center justify-center gap-3'>
+          <p className='text-sm font-semibold text-primary'>Our Services</p>
           <p className='text-3xl font-bold'>
             Fostering a playful & engaging learning environment
           </p>
@@ -59,7 +59,7 @@ export default function Services() {
               align: 'start',
               loop: true,
             }}
-            className='w-full m-auto'
+            className='m-auto w-full'
           >
             <CarouselContent>
               {services.map((service, index) => (

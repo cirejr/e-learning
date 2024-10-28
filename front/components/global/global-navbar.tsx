@@ -8,7 +8,7 @@ import {
   NavbarItem,
   Link as NextLink,
 } from '@nextui-org/react';
-import { AcmeLogo } from './acme-logo';
+import { AcmeLogo } from '../../app/(template)/template/_components/acme-logo';
 import { Button } from '../ui/button';
 import { Link } from 'next-view-transitions';
 
@@ -21,27 +21,18 @@ export default function GlobalNavbar() {
       </NavbarBrand>
       <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
         <NavbarItem>
-          <NextLink  href='/' aria-current='page'>
+          <NextLink href='/' aria-current='page'>
             Home
           </NextLink>
         </NavbarItem>
         <NavbarItem>
-          <NextLink href='/about-us'  >
-            About us
-          </NextLink>
-            
+          <NextLink href='/about-us'>About us</NextLink>
         </NavbarItem>
         <NavbarItem>
-          <NextLink href='/courses'  >
-            Courses
-          </NextLink>
-            
+          <NextLink href='/courses'>Courses</NextLink>
         </NavbarItem>
         <NavbarItem>
-          <NextLink href='/contact'  >
-            Contact us
-          </NextLink>
-            
+          <NextLink href='/contact'>Contact us</NextLink>
         </NavbarItem>
         <NavbarItem>
           <NextLink href='/admin'>Dashboard</NextLink>

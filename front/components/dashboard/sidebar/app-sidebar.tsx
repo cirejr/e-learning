@@ -35,7 +35,7 @@ import {
   SidebarLabel,
 } from '@/components/ui/sidebar';
 import { Link } from 'next-view-transitions';
-import { AcmeLogo } from '@/components/global/acme-logo';
+import { AcmeLogo } from '@/app/(template)/template/_components/acme-logo';
 import { usePathname } from 'next/navigation';
 import { getMenuList } from '@/lib/menu-list';
 const data = {

@@ -1,25 +1,13 @@
 'use client';
 import React from 'react';
 
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
-import { Icons } from '../ui/icons';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Icons } from '@/components/ui/icons';
 import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { Link } from 'next-view-transitions';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-} from '../ui/navigation-menu';
-import FooterImageCard from './footer-image-card';
+import FooterLogo from '@/components/global/footer-logo';
 import { usefullLinks } from './config';
-import FooterLogo from './footer-logo';
 
 const socialIcons = [
   { icon: <Icons.gitHub />, href: '#' },
@@ -30,13 +18,13 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <main className='w-full p-6 dark bg-slate-950 '>
-      <Card className='dark rounded-none border-none mt-10'>
-        <CardContent className='flex flex-col gap-6 md:gap-1 md:flex-row justify-between'>
+    <main className='w-full bg-slate-950 p-6 dark'>
+      <Card className='mt-10 rounded-none border-none dark'>
+        <CardContent className='flex flex-col justify-between gap-6 md:flex-row md:gap-1'>
           <div className='mt-6'>
             <FooterLogo />
           </div>
-          <div className='flex w-full md:w-2/3 justify-center gap-4'>
+          <div className='flex w-full justify-center gap-4 md:w-2/3'>
             {usefullLinks.map((link, index) => (
               <Listbox key={index}>
                 <ListboxSection title={link.headTitle}>

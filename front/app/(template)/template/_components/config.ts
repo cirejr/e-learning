@@ -1,4 +1,4 @@
-import { ArticleProps } from './article-card';
+import { ArticleProps } from '@/app/(template)/template/_components/article-card';
 
 export const usefullLinks: {
   headTitle: string;

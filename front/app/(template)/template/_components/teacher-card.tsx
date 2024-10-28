@@ -9,7 +9,7 @@ import {
   Button,
 } from '@nextui-org/react';
 import { Link } from 'next-view-transitions';
-import { Icons } from '../ui/icons';
+import { Icons } from '../../../../components/ui/icons';
 
 type TeacherCardProps = {
   userImage: string;

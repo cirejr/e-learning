@@ -1,16 +1,16 @@
 import React from 'react';
-import SectionWrapper from './section-wrapper';
+import SectionWrapper from '@/app/(template)/template/_components/section-wrapper';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '../ui/carousel';
-import CourseCard from './course-card';
+} from '@/components/ui/carousel';
+import CourseCard from '@/app/(template)/template/_components/course-card';
 import { courses } from './config';
-import { Button } from '../ui/button';
-import { Icons } from '../ui/icons';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
 import { Link } from 'next-view-transitions';
 
 export default function CoursesSection() {
@@ -20,13 +20,13 @@ export default function CoursesSection() {
       headTitle='Our Most Popular Class'
       description="Let's join our famous class, the knowledge provided will definitely be useful for you."
     >
-      <div className='mx-auto max-w-6xl mt-6'>
+      <div className='mx-auto mt-6 max-w-6xl'>
         <Carousel
           opts={{
             align: 'start',
             loop: true,
           }}
-          className='w-full m-auto'
+          className='m-auto w-full'
         >
           <CarouselContent className=''>
             {courses.map((course, index) => (
@@ -48,7 +48,7 @@ export default function CoursesSection() {
           <CarouselNext />
         </Carousel>
       </div>
-      <div className='flex items-center justify-center w-full py-10'>
+      <div className='flex w-full items-center justify-center py-10'>
         <Button
           variant='ghost'
           size={'lg'}
@@ -57,7 +57,7 @@ export default function CoursesSection() {
         >
           <Link href='/courses'>
             Explore All Programs
-            <Icons.chevronRight className='flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1' />
+            <Icons.chevronRight className='h-4 w-4 flex-shrink-0 transition ease-in-out group-hover:translate-x-1' />
           </Link>
         </Button>
       </div>

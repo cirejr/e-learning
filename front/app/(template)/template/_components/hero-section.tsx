@@ -1,14 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Button as NextButton } from '@nextui-org/react';
-import {
-  BriefcaseIcon,
-  FlowerIcon,
-  HeartIcon,
-  LightbulbIcon,
-  MountainSnow,
-  SearchIcon,
-  SettingsIcon,
-} from 'lucide-react';
+import { BriefcaseIcon, LightbulbIcon, SettingsIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function HeroSection() {
@@ -17,10 +9,10 @@ export default function HeroSection() {
       {/* Hero */}
       <div className='container py-24'>
         {/* Grid */}
-        <div className='grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center relative'>
-          <div className='hidden md:block absolute top-0 end-0 -translate-y-12 translate-x-20'>
+        <div className='relative grid gap-4 md:grid-cols-2 md:items-center md:gap-8 xl:gap-20'>
+          <div className='absolute end-0 top-0 hidden -translate-y-12 translate-x-20 md:block'>
             <svg
-              className='w-16 h-auto text-orange-500'
+              className='h-auto w-16 text-orange-500'
               width={121}
               height={135}
               viewBox='0 0 121 135'
@@ -49,9 +41,9 @@ export default function HeroSection() {
           </div>
           {/* End SVG Element */}
           {/* SVG Element */}
-          <div className='hidden md:block absolute bottom-0 start-0 translate-y-10 -translate-x-32'>
+          <div className='absolute bottom-0 start-0 hidden -translate-x-32 translate-y-10 md:block'>
             <svg
-              className='w-40 h-auto text-cyan-500'
+              className='h-auto w-40 text-cyan-500'
               width={347}
               height={188}
               viewBox='0 0 347 188'
@@ -75,29 +67,29 @@ export default function HeroSection() {
               learning system and material that help your knowledge growing.
             </p>
             {/* Buttons */}
-            <div className='mt-7 grid gap-3 w-full sm:inline-flex'>
+            <div className='mt-7 grid w-full gap-3 sm:inline-flex'>
               <Button size={'lg'}>Get started</Button>
               <Button
                 variant={'secondary'}
                 size={'lg'}
-                className='bg-primary-foreground text-primary '
+                className='bg-primary-foreground text-primary'
               >
                 Get free trial
               </Button>
             </div>
             {/* End Buttons */}
 
-            <div className='mt-10 sm:mt-20 flex gap-2 justify-center'>
+            <div className='mt-10 flex justify-center gap-2 sm:mt-20'>
               <NextButton variant={'flat'} color='default' radius='sm'>
-                <BriefcaseIcon className='flex-shrink-0 w-3 h-auto mr-2' />
+                <BriefcaseIcon className='mr-2 h-auto w-3 flex-shrink-0' />
                 Business Mind
               </NextButton>
               <NextButton variant={'flat'} color='danger' radius='sm'>
-                <SettingsIcon className='flex-shrink-0 w-3 h-auto mr-2' />
+                <SettingsIcon className='mr-2 h-auto w-3 flex-shrink-0' />
                 Career-Oriented
               </NextButton>
               <NextButton variant={'flat'} radius='sm' color='success'>
-                <LightbulbIcon className='flex-shrink-0 w-3 h-auto mr-2' />
+                <LightbulbIcon className='mr-2 h-auto w-3 flex-shrink-0' />
                 Creative Thinking
               </NextButton>
             </div>

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Menu } from '@/components/dashboard/menu';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 import { SidebarToggle } from '@/components/dashboard/sidebar-toggle';
-import { AcmeLogo } from '../global/acme-logo';
+import { AcmeLogo } from '../../app/(template)/template/_components/acme-logo';
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
