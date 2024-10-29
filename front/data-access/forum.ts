@@ -20,7 +20,8 @@ export async function getPostsWithRepliesCount() {
 
   const { data, error } = await supabase
     .from('post_with_reply_count')
-    .select('*, profiles(first_name, last_name), forum_topics(title)');
+    .select('*, profiles(first_name, last_name), forum_topics(title)')
+    .order('post_created_at', { ascending: false });
 
   if (error) {
     throw error;

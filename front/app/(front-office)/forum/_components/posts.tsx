@@ -6,7 +6,6 @@ import { intlFormat } from 'date-fns';
 
 export default async function Posts() {
   const posts = await getPostsWithRepliesCount();
-  console.log('posts', posts);
   return (
     <div className='space-y-4'>
       {posts.map((post, index) => (

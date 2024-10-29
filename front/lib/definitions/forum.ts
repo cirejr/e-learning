@@ -4,6 +4,7 @@ export interface Profile {
 }
 
 export interface ForumTopic {
+  id: string;
   title: string;
 }
 

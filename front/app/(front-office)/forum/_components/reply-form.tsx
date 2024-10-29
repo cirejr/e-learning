@@ -18,15 +18,10 @@ import {
 import { Button } from '@/components/ui/button';
 
 import { MessageSquare } from 'lucide-react';
-import { postComment } from '@/lib/actions/form';
+import { postComment } from '@/lib/actions/forum';
 import { toast } from 'sonner';
 import { Icons } from '@/components/ui/icons';
-
-export const commentSchema = z.object({
-  content: z.string().min(10, {
-    message: 'Le commentaire doit faire au moins 10 caractères.',
-  }),
-});
+import { commentSchema } from './schemas';
 
 export default function ReplyForm({
   userId,
