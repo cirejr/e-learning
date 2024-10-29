@@ -42,12 +42,12 @@ export async function getUserData() {
 export async function getUser() {
   const supabase = createClient();
 
-  const res = await supabase.auth.getUser();
-
-  if (res.error) {
-    return res.error;
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Error fetching user:', error);
+    return null;
   }
-  return res.data;
+  return data.user;
 }
 
 export async function getCourses() {

@@ -8,7 +8,7 @@ import { Newspaper } from 'lucide-react';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
+  { name: 'About', href: '/about-us' },
   { name: 'Courses', href: '/courses' },
   { name: 'Forum', href: '/forum' },
   { name: 'Admissions', href: '/admissions' },
