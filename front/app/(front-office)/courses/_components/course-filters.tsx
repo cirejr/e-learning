@@ -16,10 +16,6 @@ import { Course } from '@/lib/definitions/course';
 interface CourseFiltersProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
-  selectedLevel: string;
-  setSelectedLevel: (level: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
   resetFilters: () => void;
@@ -27,8 +23,6 @@ interface CourseFiltersProps {
 
 export default function CourseFilters({ courses }: { courses: Course[] }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedLevel, setSelectedLevel] = useState('all');
   const [sortBy, setSortBy] = useState('title');
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 10;
@@ -39,13 +33,7 @@ export default function CourseFilters({ courses }: { courses: Course[] }) {
         const matchesSearch = course.title
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
-        const matchesCategory =
-          selectedCategory === 'all' ||
-          course.category.toLowerCase() === selectedCategory;
-        const matchesLevel =
-          selectedLevel === 'all' ||
-          course.level.toLowerCase() === selectedLevel;
-        return matchesSearch && matchesCategory && matchesLevel;
+        return matchesSearch;
       })
       .sort((a, b) => {
         switch (sortBy) {
@@ -53,13 +41,11 @@ export default function CourseFilters({ courses }: { courses: Course[] }) {
             return a.title.localeCompare(b.title);
           case 'newest':
             return b.id - a.id;
-          case 'popular':
-            return b.popularity - a.popularity || 0; // Example fallback
           default:
             return 0;
         }
       });
-  }, [courses, searchQuery, selectedCategory, selectedLevel, sortBy]);
+  }, [courses, searchQuery, sortBy]);
 
   const totalPages = Math.ceil(
     filteredAndSortedCourses.length / ITEMS_PER_PAGE
@@ -71,8 +57,6 @@ export default function CourseFilters({ courses }: { courses: Course[] }) {
 
   const resetFilters = () => {
     setSearchQuery('');
-    setSelectedCategory('all');
-    setSelectedLevel('all');
     setSortBy('title');
     setCurrentPage(1);
   };
@@ -90,39 +74,15 @@ export default function CourseFilters({ courses }: { courses: Course[] }) {
         />
       </div>
 
-      {/* Category, Level, Sort */}
+      {/* Sort */}
       <div className='flex flex-wrap gap-4'>
-        <select
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          value={selectedCategory}
-        >
-          <option value='all'>All Categories</option>
-          <option value='journalism'>Journalism</option>
-          <option value='digital-media'>Digital Media</option>
-          <option value='broadcasting'>Broadcasting</option>
-          <option value='communication'>Communication</option>
-        </select>
-
-        <select
-          onChange={(e) => setSelectedLevel(e.target.value)}
-          value={selectedLevel}
-        >
-          <option value='all'>All Levels</option>
-          <option value='beginner'>Beginner</option>
-          <option value='intermediate'>Intermediate</option>
-          <option value='advanced'>Advanced</option>
-        </select>
-
         <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
           <option value='title'>Title</option>
           <option value='newest'>Newest</option>
           <option value='popular'>Most Popular</option>
         </select>
 
-        {searchQuery ||
-        selectedCategory !== 'all' ||
-        selectedLevel !== 'all' ||
-        sortBy !== 'title' ? (
+        {searchQuery || sortBy !== 'title' ? (
           <button onClick={resetFilters}>Reset Filters</button>
         ) : null}
       </div>

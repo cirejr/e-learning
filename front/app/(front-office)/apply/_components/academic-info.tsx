@@ -73,9 +73,9 @@ export function AcademicInfo({ data, updateData }: AcademicInfoProps) {
           <SelectContent>
             <SelectItem value='high-school'>High School</SelectItem>
             <SelectItem value='some-college'>Some College</SelectItem>
-            <SelectItem value='associates'>Associate's Degree</SelectItem>
-            <SelectItem value='bachelors'>Bachelor's Degree</SelectItem>
-            <SelectItem value='masters'>Master's Degree</SelectItem>
+            <SelectItem value='associates'>Associate&apos;s Degree</SelectItem>
+            <SelectItem value='bachelors'>Bachelor&apos;s Degree</SelectItem>
+            <SelectItem value='masters'>Master&apos;s Degree</SelectItem>
             <SelectItem value='doctorate'>Doctorate</SelectItem>
           </SelectContent>
         </Select>

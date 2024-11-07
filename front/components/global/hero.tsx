@@ -15,7 +15,8 @@ export function Hero() {
           <p className='max-w-2xl text-xl text-gray-200'>
             Rejoignez notre prestigieux programme de journalisme et de
             communication pour développer les compétences nécessaires à la
-            réussite dans le paysage médiatique dynamique d&apos;aujourd'hui.
+            réussite dans le paysage médiatique dynamique
+            d&apos;aujourd&apos;hui.
           </p>
           <div className='flex flex-wrap gap-4'>
             <Button size='lg' asChild>

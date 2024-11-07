@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Icons } from '../ui/icons';
 import getPrograms from '@/data-access/programs';
+import Image from 'next/image';
 
 export async function Programs() {
   const programs = await getPrograms();
@@ -24,7 +25,7 @@ export async function Programs() {
           {programs.map((program, index) => (
             <Card key={index} className='overflow-hidden'>
               <div className='relative aspect-video'>
-                <img
+                <Image
                   src={program.image_url}
                   alt={program.title}
                   className='absolute inset-0 h-full w-full object-cover'

@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { Course } from '@/lib/definitions/course';
 import { formatDate } from 'date-fns';
 import LearnMore from '@/app/(template)/template/_components/learn-more';
+import Image from 'next/image';
 
 export function CourseCard({ course }: { course: Course }) {
   return (
     <Card className='flex flex-col overflow-hidden'>
       <div className='relative aspect-video'>
-        <img
+        <Image
           src={course.thumbnail_url}
           alt={course.title}
           className='absolute inset-0 h-full w-full object-cover'

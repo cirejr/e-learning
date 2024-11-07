@@ -31,7 +31,7 @@ export const CredentielsEmail = ({
     <Preview>Bienvenue sur la plateforme CFTS !</Preview>
     <Body style={main}>
       <Container style={container}>
-        {/* <Img
+        {/* <Image
             src={`${baseUrl}/static/cfts-logo.png`}
             width="170"
             height="50"
@@ -54,13 +54,13 @@ export const CredentielsEmail = ({
           première connexion pour garantir la sécurité de votre compte.
         </Text>
         <Text style={paragraph}>
-          Si vous avez des questions ou besoin d'assistance, n'hésitez pas à
-          nous contacter.
+          Si vous avez des questions ou besoin d&apos;assistance, n&apos;hésitez
+          pas à nous contacter.
         </Text>
         <Text style={paragraph}>
           À bientôt sur CFTS !
           <br />
-          L’équipe CFTS
+          L&apos;équipe CFTS
         </Text>
         <Hr style={hr} />
         <Text style={footer}>

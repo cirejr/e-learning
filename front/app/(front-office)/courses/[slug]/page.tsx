@@ -14,6 +14,7 @@ import { getCourseById } from '@/data-access/courses';
 import { formatDate } from 'date-fns';
 import { Course } from '@/lib/definitions/course';
 import { Link } from 'next-view-transitions';
+import Image from 'next/image';
 
 interface Teacher {
   first_name: string;
@@ -72,7 +73,7 @@ export default async function CourseDetails({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <img
+              <Image
                 src={course.thumbnail_url}
                 alt={course.title}
                 className='mb-6 h-64 w-full rounded-lg object-cover'

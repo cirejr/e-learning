@@ -12,51 +12,45 @@ import {
 } from '@react-email/components';
 import * as React from 'react';
 
-interface WelcomeEmailProps {
+interface ContactFormEmailProps {
   name: string;
   email: string;
-  password: string;
+  message: string;
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : '';
-export const WelcomeEmail = ({ name, email, password }: WelcomeEmailProps) => (
+
+const ContactFormEmail = ({ name, email, message }: ContactFormEmailProps) => (
   <Html>
     <Head />
-    <Preview>Bienvenue sur la plateforme CFTS !</Preview>
+    <Preview>Nouveau message depuis le formulaire de contact de {name}</Preview>
     <Body style={main}>
       <Container style={container}>
         {/* <Img
-            src={`${baseUrl}/static/cfts-logo.png`}
-            width="170"
-            height="50"
-            alt="CFTS"
-            style={logo}
-          /> */}
-        <Text style={paragraph}>Bonjour {name},</Text>
+          src={`${baseUrl}/static/koala-logo.png`}
+          width='170'
+          height='50'
+          alt='Koala'
+          style={logo}
+        /> */}
+        <Text style={paragraph}>Bonjour équipe CFTS,</Text>
         <Text style={paragraph}>
-          Bienvenue sur la plateforme CFTS ! Nous sommes ravis de vous compter
-          parmi nos utilisateurs. Voici vos identifiants pour vous connecter :
+          Vous avez reçu un nouveau message depuis le formulaire de contact de
+          votre site web. Voici les détails :
+        </Text>
+        <Text style={paragraph}>
+          <strong>Nom :</strong> {name}
         </Text>
         <Text style={paragraph}>
           <strong>Email :</strong> {email}
         </Text>
         <Text style={paragraph}>
-          <strong>Mot de passe :</strong> {password}
+          <strong>Message :</strong> {message}
         </Text>
         <Text style={paragraph}>
-          Nous vous recommandons de modifier votre mot de passe après votre
-          première connexion pour garantir la sécurité de votre compte.
-        </Text>
-        <Text style={paragraph}>
-          Si vous avez des questions ou besoin d'assistance, n'hésitez pas à
-          nous contacter.
-        </Text>
-        <Text style={paragraph}>
-          À bientôt sur CFTS !
-          <br />
-          L’équipe CFTS
+          Merci de répondre à {name} à l&apos;adresse {email} dès que possible.
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
@@ -67,7 +61,7 @@ export const WelcomeEmail = ({ name, email, password }: WelcomeEmailProps) => (
   </Html>
 );
 
-export default WelcomeEmailProps;
+export default ContactFormEmail;
 
 const main = {
   backgroundColor: '#ffffff',

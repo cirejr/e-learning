@@ -17,7 +17,8 @@ export default async function ForumPage() {
               Forum des étudiants
             </h1>
             <p className='mt-4 text-lg text-primary-foreground/90'>
-              Participez aux échanges avec d'autres étudiants et professionnels
+              Participez aux échanges avec d&apos;autres étudiants et
+              professionnels
             </p>
           </div>
         </div>

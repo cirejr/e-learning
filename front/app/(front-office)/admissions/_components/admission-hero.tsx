@@ -12,7 +12,7 @@ export function AdmissionHero() {
           <h1 className='text-4xl font-bold sm:text-5xl'>Admissions</h1>
           <p className='text-xl text-gray-200'>
             Begin your journey in journalism and communication at one of the
-            world's leading institutions
+            world&apos;s leading institutions
           </p>
           <div className='flex flex-wrap gap-4'>
             <Button size='lg' asChild>

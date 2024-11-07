@@ -37,7 +37,7 @@ export function Requirements() {
       <div className='mb-12 text-center'>
         <h2 className='mb-4 text-3xl font-bold'>Admission Requirements</h2>
         <p className='mx-auto max-w-2xl text-muted-foreground'>
-          Review our comprehensive admission requirements to ensure you're
+          Review our comprehensive admission requirements to ensure you&apos;re
           prepared for your application
         </p>
       </div>

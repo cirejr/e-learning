@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { History, Users, Award, BookOpen } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AboutPage() {
@@ -15,8 +16,8 @@ export default function AboutPage() {
           <div className='max-w-3xl space-y-6 text-white'>
             <h1 className='text-4xl font-bold sm:text-5xl'>Notre Histoire</h1>
             <p className='text-xl text-gray-200'>
-              Façonner l'avenir du journalisme et de la communication depuis
-              1970
+              Façonner l&apos;avenir du journalisme et de la communication
+              depuis 1970
             </p>
           </div>
         </div>
@@ -59,7 +60,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className='relative aspect-square md:aspect-auto'>
-            <img
+            <Image
               src='https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
               alt='Étudiants travaillant'
               className='absolute inset-0 h-full w-full rounded-lg object-cover'
@@ -122,7 +123,7 @@ export default function AboutPage() {
             <Card key={index}>
               <CardContent className='p-6 text-center'>
                 <div className='relative mb-4 aspect-square overflow-hidden rounded-full'>
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
                     className='absolute inset-0 h-full w-full object-cover'
@@ -143,8 +144,8 @@ export default function AboutPage() {
             Rejoignez Notre Communauté
           </h2>
           <p className='mx-auto mb-8 max-w-2xl text-primary-foreground/90'>
-            Faites partie de notre héritage dans l'éducation en journalisme et
-            en communication
+            Faites partie de notre héritage dans l&apos;éducation en journalisme
+            et en communication
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             <Button size='lg' variant='secondary' asChild>
