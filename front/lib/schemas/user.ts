@@ -15,7 +15,4 @@ export const userSchema = z.object({
   role: z.enum(['admin', 'teacher', 'student'], {
     required_error: 'Veuillez choisir un rôle.',
   }),
-  password: z.string({
-    required_error: 'Veuillez tapez le mot de passe.',
-  }),
 });

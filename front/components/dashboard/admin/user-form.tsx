@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -23,14 +23,16 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { createUser, updateUser } from '@/lib/actions/user';
+import { createUser, signUp, updateUser } from '@/lib/actions/user';
 import { userSchema } from '@/lib/schemas/user';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/icons';
+import { SheetClose } from '@/components/ui/sheet';
 
-export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
+export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen?: any }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
@@ -38,7 +40,6 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
       email: user?.email || undefined,
       first_name: user?.first_name || undefined,
       last_name: user?.last_name || undefined,
-      password: user?.password || undefined,
       role: user?.role || 'student',
     },
   });
@@ -59,7 +60,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
         router.push('/admin/users');
       } else if (res.error) {
         //@ts-ignore
-        toast.error(res.error.message as string);
+        console.error(res.error.message as string);
       }
     } catch (error) {
       toast.error(
@@ -69,14 +70,13 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
       );
     }
     setIsLoading(false);
-    setIsOpen(false);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='w-auto space-y-6'
+        className='w-auto space-y-6 px-6'
       >
         <FormField
           control={form.control}
@@ -122,20 +122,6 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
 
         <FormField
           control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Mot de passe</FormLabel>
-              <FormControl>
-                <Input {...field} type='password' placeholder='Mot de passe' />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name='role'
           render={({ field }) => (
             <FormItem>
@@ -160,6 +146,9 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen: any }) {
           {isLoading && <Icons.loader className='mr-2 h-4 w-4 animate-spin' />}
           {user ? 'Modifier' : 'Créer'}
         </Button>
+        <SheetClose asChild>
+          <button ref={closeRef} style={{ display: 'none' }} />
+        </SheetClose>
       </form>
     </Form>
   );

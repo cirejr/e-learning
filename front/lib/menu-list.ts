@@ -5,6 +5,7 @@ import {
   Bookmark,
   SquarePen,
   LayoutGrid,
+  Files,
 } from 'lucide-react';
 
 type Submenu = {
@@ -51,6 +52,13 @@ export function getMenuList(pathname: string): Group[] {
             label: 'Courses',
             active: pathname.includes('/courses'),
             icon: Bookmark,
+            submenus: [],
+          },
+          {
+            href: '/admin/applications',
+            label: 'Admissions',
+            active: pathname.includes('/applications'),
+            icon: Files,
             submenus: [],
           },
           /* {

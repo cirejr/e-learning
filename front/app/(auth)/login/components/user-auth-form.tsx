@@ -55,6 +55,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           : res.error
       );
     }
+    setIsLoading(false);
   });
 
   return (

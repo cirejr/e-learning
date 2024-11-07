@@ -1,98 +1,189 @@
+import React from 'react';
+import { Calendar, Clock, Users, Video, Book, Award } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getCourseById } from '@/data-access/courses';
+import { formatDate } from 'date-fns';
+import { Course } from '@/lib/definitions/course';
+import { Link } from 'next-view-transitions';
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Calendar, Clock, Code, Link as LinkIcon, User } from 'lucide-react'
-import CourseCreationForm from "@/components/dashboard/create-course-form"
-
-type Course = {
-  id: number
-  title: string
-  description: string
-  code: string
-  start_date: string
-  end_date: string
-  teacher_id: string
-  url?: string
+interface Teacher {
+  first_name: string;
+  last_name: string;
+  avatar_url: string;
 }
 
-// This would normally come from your data fetching logic
-const fakeCourse: Course = {
-  id: 1,
-  title: "Introduction to Journalism",
-  description: "Learn the basics of journalism and reporting. This fakeCourse covers fundamental principles of news gathering, writing, and ethical reporting. Students will develop critical thinking skills and learn to craft compelling stories across various media platforms.",
-  code: "JOUR101",
-  start_date: "2024-01-15",
-  end_date: "2024-05-30",
-  teacher_id: "550e8400-e29b-41d4-a716-446655440000",
-  url: "https://example.com/intro-to-journalism"
-}
+/* const course: Course = {
+  id: '1',
+  title: "Journalisme d'Investigation Avancé",
+  description:
+    "Approfondissez vos compétences en journalisme d'investigation avec ce cours avancé. Apprenez les techniques modernes de recherche, d'analyse de données et de reportage éthique.",
+  duration: '12 semaines',
+  level: 'Avancé',
+  students_enrolled: 45,
+  thumbnail_url: '/placeholder.svg?height=400&width=600',
+  course_link: 'https://zoom.us/j/example',
+  teachers: [
+    {
+      first_name: 'Marie',
+      last_name: 'Dupont',
+      avatar_url: '/placeholder.svg?height=100&width=100&text=MD',
+    },
+    {
+      first_name: 'Jean',
+      last_name: 'Martin',
+      avatar_url: '/placeholder.svg?height=100&width=100&text=JM',
+    },
+  ],
+  start_date: '2024-09-01',
+  syllabus: [
+    "Introduction au journalisme d'investigation",
+    'Techniques de recherche avancées',
+    'Analyse de données et visualisation',
+    "Éthique et légalité dans le journalisme d'investigation",
+    "Rédaction de reportages d'investigation",
+    'Sécurité numérique pour journalistes',
+  ],
+  progress: 65,
+}; */
 
-export default async function CourseDetailPage({ params }: { params: { slug: string } }) {
-  //const { code } = params.slug
-
-
+export default async function CourseDetails({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const course = (await getCourseById(searchParams.id as string)) as Course;
   return (
-    <div className="p-8">
-      <Card className="mx-auto max-w-3xl">
-        <CardHeader>
-          <div className="flex items-start justify-between">
-            <div>
-              <CardTitle className="mb-2 text-3xl">{fakeCourse.title}</CardTitle>
-              <CardDescription className="text-lg">{fakeCourse.code}</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div>
-            <h3 className="mb-2 text-lg font-semibold">Description</h3>
-            <p className="text-gray-700">{fakeCourse.description}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex items-center">
-              <Calendar className="mr-2 h-4 w-4 text-gray-500" />
-              <span>Start Date: {new Date(fakeCourse.start_date).toLocaleDateString()}</span>
-            </div>
-            <div className="flex items-center">
-              <Calendar className="mr-2 h-4 w-4 text-gray-500" />
-              <span>End Date: {new Date(fakeCourse.end_date).toLocaleDateString()}</span>
-            </div>
-            <div className="flex items-center">
-              <Clock className="mr-2 h-4 w-4 text-gray-500" />
-              <span>Duration: {Math.ceil((new Date(fakeCourse.end_date).getTime() - new Date(fakeCourse.start_date).getTime()) / (1000 * 3600 * 24 * 7))} weeks</span>
-            </div>
-            <div className="flex items-center">
-              <Code className="mr-2 h-4 w-4 text-gray-500" />
-              <span>Course Code: {fakeCourse.code}</span>
-            </div>
-          </div>
-          {fakeCourse.url && (
-            <div className="flex items-center">
-              <LinkIcon className="mr-2 h-4 w-4 text-gray-500" />
-              <a href={fakeCourse.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                Course Website
-              </a>
-            </div>
-          )}
-          <div className="flex items-center">
-            <User className="mr-2 h-4 w-4 text-gray-500" />
-            <span>Teacher ID: {fakeCourse.teacher_id}</span>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <div className="flex items-center">
-            <Avatar className="mr-4 h-10 w-10">
-              <AvatarImage src="/placeholder.svg?height=40&width=40" alt="Teacher" />
-              <AvatarFallback>TC</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm font-medium">Teacher Name</p>
-              <p className="text-sm text-gray-500">teacher@example.com</p>
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
+    <div className='container mx-auto px-4 py-8'>
+      <div className='grid gap-8 md:grid-cols-3'>
+        <div className='md:col-span-2'>
+          <Card>
+            <CardHeader>
+              <CardTitle className='text-3xl font-bold'>
+                {course.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <img
+                src={course.thumbnail_url}
+                alt={course.title}
+                className='mb-6 h-64 w-full rounded-lg object-cover'
+              />
+              <CardDescription className='mb-6 text-lg'>
+                {course.description}
+              </CardDescription>
+              <div className='mb-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
+                <div className='flex items-center'>
+                  <Calendar className='mr-2 h-5 w-5 text-teal-600' />
+                  <span>
+                    {formatDate(new Date(course.start_date), 'dd/MM/yyyy')}
+                  </span>
+                </div>
+                {/* <div className='flex items-center'>
+                  <Clock className='mr-2 h-5 w-5 text-teal-600' />
+                  <span>{course.duration}</span>
+                </div> */}
+                {/* <div className='flex items-center'>
+                  <Users className='mr-2 h-5 w-5 text-teal-600' />
+                  <span>{course.students_enrolled} étudiants</span>
+                </div>
+                <div className='flex items-center'>
+                  <Award className='mr-2 h-5 w-5 text-teal-600' />
+                  <span>{course.level}</span>
+                </div> */}
+              </div>
+              <h3 className='mb-4 text-xl font-semibold'>Programme du cours</h3>
+              <ul className='list-disc space-y-2 pl-5'>
+                {course?.modules.map((module, index) => (
+                  <li key={index}>
+                    <div className='flex items-center space-x-2'>
+                      <span>{module.title}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button className='w-full' size='lg' asChild>
+                <Link href={`/${course.url}`}>
+                  <Video className='mr-2 h-4 w-4' /> Rejoindre le cours en ligne
+                </Link>
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+        <div className='space-y-6'>
+          {/* <Card>
+            <CardHeader>
+              <CardTitle>Progression du cours</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Progress value={course.progress} className='w-full' />
+              <p className='mt-2 text-center'>{course.progress}% complété</p>
+            </CardContent>
+          </Card> */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Enseignants</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className='space-y-4'>
+                <div className='flex items-center space-x-4'>
+                  <Avatar>
+                    <AvatarImage
+                      src={course.profiles.avatar_url}
+                      alt={`${course.profiles.first_name} ${course.profiles.last_name}`}
+                    />
+                    <AvatarFallback>
+                      {course.profiles.first_name[0]}
+                      {course.profiles.last_name[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className='font-medium'>
+                      {course.profiles.first_name} {course.profiles.last_name}
+                    </p>
+                    <p className='text-sm text-gray-500'>Professeur</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Ressources du cours</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className='space-y-2'>
+                <li>
+                  <a
+                    href='#'
+                    className='flex items-center text-teal-600 hover:underline'
+                  >
+                    <Book className='mr-2 h-4 w-4' /> Guide du cours (PDF)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='#'
+                    className='flex items-center text-teal-600 hover:underline'
+                  >
+                    <Video className='mr-2 h-4 w-4' /> Vidéos supplémentaires
+                  </a>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

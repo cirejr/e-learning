@@ -1,109 +1,34 @@
-'use client';
-
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import ContactForm from './_components/contact-form';
 
 export default function Contact() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', { name, email, subject, message });
-  };
-
   return (
     <div className='min-h-screen'>
       <main className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
         <div className='mb-16 text-center'>
-          <h2 className='mb-4 text-4xl font-bold text-primary'>Contact Us</h2>
+          <h2 className='mb-4 text-4xl font-bold text-primary'>
+            Contactez-nous
+          </h2>
           <p className='mx-auto max-w-3xl text-xl text-muted-foreground'>
-            Have questions or feedback? We&apos;d love to hear from you. Reach
-            out to us using the form below or through our contact information.
+            Des questions ou des retours ? Nous serions ravis de vous entendre.
+            N&apos;hésitez pas à nous contacter via notre formulaire ci-dessous
+            ou utiliser nos informations de contact.
           </p>
         </div>
 
         <div className='grid grid-cols-1 gap-12 md:grid-cols-2'>
-          <div>
-            <form onSubmit={handleSubmit} className='space-y-6'>
-              <div>
-                <label htmlFor='name' className='block text-sm font-medium'>
-                  Name
-                </label>
-                <Input
-                  id='name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className='mt-1'
-                />
-              </div>
-              <div>
-                <label htmlFor='email' className='block text-sm font-medium'>
-                  Email
-                </label>
-                <Input
-                  id='email'
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className='mt-1'
-                />
-              </div>
-              <div>
-                <label htmlFor='subject' className='block text-sm font-medium'>
-                  Subject
-                </label>
-                <Select value={subject} onValueChange={setSubject}>
-                  <SelectTrigger className='mt-1'>
-                    <SelectValue placeholder='Select a subject' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='general'>General Inquiry</SelectItem>
-                    <SelectItem value='admissions'>Admissions</SelectItem>
-                    <SelectItem value='courses'>Course Information</SelectItem>
-                    <SelectItem value='technical'>Technical Support</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label htmlFor='message' className='block text-sm font-medium'>
-                  Message
-                </label>
-                <Textarea
-                  id='message'
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  className='mt-1'
-                  rows={5}
-                />
-              </div>
-              <Button type='submit' className='w-full'>
-                Send Message
-              </Button>
-            </form>
-          </div>
+          <Card>
+            <CardContent>
+              <ContactForm />
+            </CardContent>
+          </Card>
 
           <div className='space-y-8'>
             <Card>
               <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
+                <CardTitle>Informations de contact</CardTitle>
               </CardHeader>
               <CardContent className='space-y-4'>
                 <div className='flex items-center'>
@@ -123,18 +48,9 @@ export default function Contact() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Office Hours</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
-                <p>Saturday: 10:00 AM - 2:00 PM</p>
-                <p>Sunday: Closed</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Connect With Us</CardTitle>
+                <CardTitle>
+                  Retrouvez nous sur les différents réseaux sociaux
+                </CardTitle>
               </CardHeader>
               <CardContent className='flex space-x-4'>
                 <Button variant='outline' size='icon'>

@@ -4,26 +4,27 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Newspaper } from 'lucide-react';
+import { Camera } from 'lucide-react';
+import { User } from '@supabase/supabase-js';
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about-us' },
   { name: 'Courses', href: '/courses' },
   { name: 'Forum', href: '/forum' },
-  { name: 'Admissions', href: '/admissions' },
+  /* { name: 'Admissions', href: '/admissions' }, */
   { name: 'Contact', href: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: User }) {
   const pathname = usePathname();
-
+  console.log('user in navbar', user);
   return (
     <header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-16 items-center'>
         <Link href='/' className='flex items-center space-x-2'>
-          <Newspaper className='h-6 w-6' />
-          <span className='font-bold'>JournalismEdu</span>
+          <Camera className='h-8 w-8' />
+          <span className='text-2xl font-bold'>CFTS</span>
         </Link>
         <nav className='flex flex-1 items-center justify-center space-x-6'>
           {navigation.map((item) => (
@@ -41,14 +42,20 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-        <div className='flex items-center space-x-4'>
-          <Button variant='outline' asChild>
-            <Link href='/login'>Log in</Link>
-          </Button>
+        {user ? (
           <Button asChild>
-            <Link href='/apply'>Apply Now</Link>
+            <Link href='/dashboard'>Dashboard</Link>
           </Button>
-        </div>
+        ) : (
+          <div className='flex items-center space-x-4'>
+            <Button variant='outline' asChild>
+              <Link href='/login'>Log in</Link>
+            </Button>
+            <Button asChild>
+              <Link href='/apply'>Apply Now</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );
