@@ -43,7 +43,6 @@ export default function ContactForm() {
         method: 'POST',
         body: formData,
       });
-      console.log('res', res);
       if (res.ok) {
         toast.success('Formulaire envoyé avec succès !');
         form.reset({ name: '', email: '', message: '' });

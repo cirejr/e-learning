@@ -38,8 +38,6 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log('user from middleware', user);
-
   if (isLoginPage && user) {
     // If the user is logged in and tries to access the login page, redirect to appropriate dashboard
 

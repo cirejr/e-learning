@@ -12,15 +12,13 @@ export async function logout() {
 
   revalidatePath('/login');
 }
-
+/* 
 export async function getUserData() {
   const supabase = createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  console.log('user', user);
 
   if (!user) {
     return null;
@@ -41,7 +39,7 @@ export async function getUserData() {
     ...user,
     profile: userData,
   };
-}
+} */
 
 export async function getUser() {
   const supabase = createClient();

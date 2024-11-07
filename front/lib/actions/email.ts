@@ -21,7 +21,5 @@ export async function sendCredententials(
     throw error;
   }
 
-  console.log('email action data: ', data);
-
   return data;
 }
