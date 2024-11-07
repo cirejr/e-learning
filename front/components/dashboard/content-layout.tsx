@@ -2,7 +2,7 @@ import { Navbar } from '@/components/dashboard/navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { ClassValue } from 'clsx';
 import { cn } from '@/lib/utils';
-import { getUserData } from '@/data-access/data';
+import { getUser } from '@/data-access/data';
 
 interface ContentLayoutProps {
   breadcrumb: React.ReactNode;
@@ -17,7 +17,7 @@ export async function ContentLayout({
   children,
   className,
 }: ContentLayoutProps) {
-  const user = await getUserData();
+  const user = await getUser();
 
   return (
     <div>
