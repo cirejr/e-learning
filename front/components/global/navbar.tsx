@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Camera } from 'lucide-react';
 import { User } from '@supabase/supabase-js';
+import MobileMenu from './mobile-menu';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -20,12 +21,12 @@ export default function Navbar({ user }: { user: User }) {
   const pathname = usePathname();
   return (
     <header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-      <div className='container flex h-16 items-center'>
+      <div className='container flex h-16 w-full items-center justify-between'>
         <Link href='/' className='flex items-center space-x-2'>
           <Camera className='h-8 w-8' />
           <span className='text-2xl font-bold'>CFTS</span>
         </Link>
-        <nav className='flex flex-1 items-center justify-center space-x-6'>
+        <nav className='hidden flex-1 items-center justify-center space-x-6 md:flex'>
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -55,6 +56,9 @@ export default function Navbar({ user }: { user: User }) {
             </Button>
           </div>
         )}
+        <div className='md:hidden'>
+          <MobileMenu user={user} navigation={navigation} />
+        </div>
       </div>
     </header>
   );

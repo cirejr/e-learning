@@ -13,6 +13,8 @@ export async function postComment(
   authorId: string,
   postId: string
 ) {
+  console.log('authorId', authorId);
+  console.log('postId', postId);
   const supabase = createClient();
   const { error } = await supabase.from('forum_comments').insert({
     content: commentData.content,
@@ -20,6 +22,7 @@ export async function postComment(
     post_id: postId,
   });
   if (error) {
+    console.log('error in post comment', error);
     throw error;
   }
 
@@ -40,6 +43,7 @@ export async function createPost(
   });
 
   if (error) {
+    console.log('error in create post', error);
     throw error;
   }
 

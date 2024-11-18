@@ -35,6 +35,7 @@ export default function CourseCard({
     <Card shadow='sm' className='w-[360px] h-[480px]' isPressable>
       <CardHeader className='justify-center'>
         <Image
+          fill
           shadow='sm'
           radius='lg'
           alt={title}

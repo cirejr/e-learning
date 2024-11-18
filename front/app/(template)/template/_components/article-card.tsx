@@ -31,12 +31,12 @@ export function Article({
       <Link href={href}>
         {!isMobile && (
           <CardHeader className='pt-0'>
-            <Image src={imageUrl} alt={title} width={500} height={300} />
+            <Image fill src={imageUrl} alt={title} width={500} height={300} />
           </CardHeader>
         )}
         <CardContent className={`flex gap-3`}>
           {isMobile && (
-            <Image src={imageUrl} alt={title} width={320} height={200} />
+            <Image fill src={imageUrl} alt={title} width={320} height={200} />
           )}
           <div className='space-y-2'>
             <p className='text-sm text-primary'>{createdAt}</p>

@@ -53,6 +53,7 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen?: any }) {
       } else {
         res = await createUser(userData);
       }
+      console.log('res to auth', res);
       if (res.success) {
         toast.success(
           user ? 'informations mis à jour' : 'Utilisateur créé avec succès'

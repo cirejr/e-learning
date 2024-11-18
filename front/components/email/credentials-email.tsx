@@ -31,7 +31,7 @@ export const CredentielsEmail = ({
     <Preview>Bienvenue sur la plateforme CFTS !</Preview>
     <Body style={main}>
       <Container style={container}>
-        {/* <Image
+        {/* <Image fill
             src={`${baseUrl}/static/cfts-logo.png`}
             width="170"
             height="50"

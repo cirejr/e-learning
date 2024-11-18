@@ -61,6 +61,7 @@ export default function AboutPage() {
           </div>
           <div className='relative aspect-square md:aspect-auto'>
             <Image
+              fill
               src='https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
               alt='Étudiants travaillant'
               className='absolute inset-0 h-full w-full rounded-lg object-cover'
@@ -124,6 +125,7 @@ export default function AboutPage() {
               <CardContent className='p-6 text-center'>
                 <div className='relative mb-4 aspect-square overflow-hidden rounded-full'>
                   <Image
+                    fill
                     src={member.image}
                     alt={member.name}
                     className='absolute inset-0 h-full w-full object-cover'

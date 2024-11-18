@@ -26,6 +26,7 @@ export async function Programs() {
             <Card key={index} className='overflow-hidden'>
               <div className='relative aspect-video'>
                 <Image
+                  fill
                   src={program.image_url}
                   alt={program.title}
                   className='absolute inset-0 h-full w-full object-cover'

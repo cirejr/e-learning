@@ -12,6 +12,7 @@ export function CourseCard({ course }: { course: Course }) {
     <Card className='flex flex-col overflow-hidden'>
       <div className='relative aspect-video'>
         <Image
+          fill
           src={course.thumbnail_url}
           alt={course.title}
           className='absolute inset-0 h-full w-full object-cover'

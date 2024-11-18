@@ -73,11 +73,14 @@ export default async function CourseDetails({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Image
-                src={course.thumbnail_url}
-                alt={course.title}
-                className='mb-6 h-64 w-full rounded-lg object-cover'
-              />
+              <div className='relative aspect-video h-64 w-full'>
+                <Image
+                  fill
+                  src={course.thumbnail_url}
+                  alt={course.title}
+                  className='mb-6 h-64 w-full rounded-lg object-cover'
+                />
+              </div>
               <CardDescription className='mb-6 text-lg'>
                 {course.description}
               </CardDescription>

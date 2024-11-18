@@ -97,6 +97,7 @@ export default function HeroSection() {
           {/* Col */}
           <div className='relative ms-4'>
             <Image
+              fill
               className='w-full rounded-md'
               src='https://img.freepik.com/photos-gratuite/nature-morte-livres-contre-technologie_23-2150063081.jpg?t=st=1715302404~exp=1715306004~hmac=eb16c9cf6547f9b314a14f327289c8190e961d480a77fd831fea08bcb248ef6c&w=740'
               alt='hero image'
