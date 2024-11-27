@@ -1,5 +1,5 @@
 export type Course = {
-  id: number;
+  id: string | number;
   title: string;
   description: string;
   url: string;
@@ -11,7 +11,9 @@ export type Course = {
   category: string;
   thumbnail_url: string;
   profiles: { last_name: string; first_name: string; avatar_url: string };
-  modules: Module[];
+  module: Module[];
+  duration: string;
+  enrollments: string[];
 };
 
 export type Module = {

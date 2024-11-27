@@ -52,7 +52,9 @@ export async function getCourseById(id: string) {
 
   const { data, error } = await supabase
     .from('courses')
-    .select('*, profiles(first_name, last_name), modules(*)')
+    .select(
+      '*, profiles(first_name, last_name), module(*), enrollments(student_id)'
+    )
     .eq('id', id);
 
   if (error) {

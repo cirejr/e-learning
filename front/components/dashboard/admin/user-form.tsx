@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { createUser, signUp, updateUser } from '@/lib/actions/user';
+import { signUp, updateUser } from '@/lib/actions/user';
 import { userSchema } from '@/lib/schemas/user';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/icons';
@@ -51,17 +51,22 @@ export function UserForm({ user, setIsOpen }: { user?: any; setIsOpen?: any }) {
       if (user) {
         res = await updateUser(user.id, userData);
       } else {
-        res = await createUser(userData);
-      }
-      console.log('res to auth', res);
-      if (res.success) {
-        toast.success(
-          user ? 'informations mis à jour' : 'Utilisateur créé avec succès'
-        );
-        router.push('/admin/users');
-      } else if (res.error) {
-        //@ts-ignore
-        console.error(res.error.message as string);
+        const data = await fetch('/api/create-user', {
+          method: 'POST',
+          body: JSON.stringify(userData),
+        });
+        const response = await data.json();
+        console.log('res to auth', response);
+        if (response.success) {
+          toast.success(
+            user ? 'informations mis à jour' : 'Utilisateur créé avec succès'
+          );
+          router.push('/admin/users');
+          //@ts-ignore
+        } else if (response.error) {
+          //@ts-ignore
+          console.error(res.error.message as string);
+        }
       }
     } catch (error) {
       toast.error(

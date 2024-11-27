@@ -84,7 +84,7 @@ export default function CourseCreationForm({
     try {
       let res;
       if (course) {
-        res = await updateCourse(course.id, data);
+        res = await updateCourse(course.id as string, data);
       } else {
         res = await createCourse(data);
       }

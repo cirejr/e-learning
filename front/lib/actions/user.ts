@@ -6,48 +6,6 @@ import { createAdminClient, createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { sendCredententials } from './email';
 
-const supabase = createClient();
-
-export async function createUser(userData: z.infer<typeof userSchema>) {
-  const supabaseAdmin = createAdminClient();
-  const password = generatePassword();
-  try {
-    const { data, error } = await supabaseAdmin.auth.admin.createUser({
-      email: userData.email,
-      email_confirm: true,
-      password,
-      user_metadata: {
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        role: userData.role,
-      },
-    });
-
-    if (error) {
-      console.log('error in signup', error);
-    }
-    /* const name = `${userData.first_name} ${userData.last_name}`;
-    await sendCredententials(name, userData.email, password); */
-
-    return { success: true, data };
-  } catch (error) {
-    return { error: error };
-  } finally {
-    revalidatePath('/admin/users', 'page');
-  }
-}
-
-function generatePassword() {
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const length = 12;
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
-
 export async function signUp(formData: FormData) {
   const supabase = createClient();
   const dataToSend = {

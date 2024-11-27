@@ -1,5 +1,13 @@
 import React from 'react';
-import { Calendar, Clock, Users, Video, Book, Award } from 'lucide-react';
+import {
+  Calendar,
+  Clock,
+  Users,
+  Video,
+  Book,
+  Award,
+  UserRoundPlus,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -15,6 +23,9 @@ import { formatDate } from 'date-fns';
 import { Course } from '@/lib/definitions/course';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
+import EnrollmentButton from '../_components/enrollment-button';
+import { getUser } from '@/data-access/data';
+import { User } from '@supabase/supabase-js';
 
 interface Teacher {
   first_name: string;
@@ -61,7 +72,16 @@ export default async function CourseDetails({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const course = (await getCourseById(searchParams.id as string)) as Course;
+  const [course, authedUser] = (await Promise.all([
+    getCourseById(searchParams.courseId as string),
+    getUser(),
+  ])) as [Course, User];
+
+  let isAuthedUser = false;
+  /* if (course.enrollments.includes(authedUser.id)) {
+    isAuthedUser = true;
+  } */
+
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='grid gap-8 md:grid-cols-3'>
@@ -81,7 +101,10 @@ export default async function CourseDetails({
                   className='mb-6 h-64 w-full rounded-lg object-cover'
                 />
               </div>
-              <CardDescription className='mb-6 text-lg'>
+              <CardDescription className='my-6 text-lg'>
+                <span className='mb-4 text-xl font-semibold text-foreground'>
+                  Description du cours
+                </span>
                 {course.description}
               </CardDescription>
               <div className='mb-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
@@ -91,36 +114,43 @@ export default async function CourseDetails({
                     {formatDate(new Date(course.start_date), 'dd/MM/yyyy')}
                   </span>
                 </div>
-                {/* <div className='flex items-center'>
+                <div className='flex items-center'>
                   <Clock className='mr-2 h-5 w-5 text-teal-600' />
                   <span>{course.duration}</span>
-                </div> */}
-                {/* <div className='flex items-center'>
-                  <Users className='mr-2 h-5 w-5 text-teal-600' />
-                  <span>{course.students_enrolled} étudiants</span>
                 </div>
                 <div className='flex items-center'>
-                  <Award className='mr-2 h-5 w-5 text-teal-600' />
-                  <span>{course.level}</span>
-                </div> */}
+                  <Users className='mr-2 h-5 w-5 text-teal-600' />
+                  <span>{course.enrollments.length} étudiants</span>
+                </div>
               </div>
-              <h3 className='mb-4 text-xl font-semibold'>Programme du cours</h3>
-              <ul className='list-disc space-y-2 pl-5'>
-                {course?.modules.map((module, index) => (
-                  <li key={index}>
-                    <div className='flex items-center space-x-2'>
-                      <span>{module.title}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {course?.module.length > 0 && (
+                <>
+                  <h3 className='mb-4 text-xl font-semibold'>
+                    Programme du cours
+                  </h3>
+                  <ul className='list-disc space-y-2 pl-5'>
+                    {course?.module.map((module, index) => (
+                      <li key={index}>
+                        <div className='flex items-center space-x-2'>
+                          <span>{module.title}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </CardContent>
             <CardFooter>
-              <Button className='w-full' size='lg' asChild>
-                <Link href={`/${course.url}`}>
-                  <Video className='mr-2 h-4 w-4' /> Rejoindre le cours en ligne
-                </Link>
-              </Button>
+              {isAuthedUser ? (
+                <Button className='w-full' size='lg' asChild>
+                  <Link href={`/${course.url}`}>
+                    <Video className='mr-2 h-4 w-4' /> Rejoindre le cours en
+                    ligne
+                  </Link>
+                </Button>
+              ) : (
+                <EnrollmentButton courseId={course.id as string} />
+              )}
             </CardFooter>
           </Card>
         </div>
