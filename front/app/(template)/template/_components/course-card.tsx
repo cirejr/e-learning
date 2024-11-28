@@ -32,18 +32,17 @@ export default function CourseCard({
   hasEnrolled,
 }: CourseCardProps) {
   return (
-    <Card shadow='sm' className='w-[360px] h-[480px]' isPressable>
+    <Card shadow='sm' className='h-[480px] w-[360px]' isPressable>
       <CardHeader className='justify-center'>
         <Image
-          fill
           shadow='sm'
           radius='lg'
           alt={title}
-          className='w-full object-fill h-[200px]'
+          className='h-[200px] w-full object-fill'
           src={imageUrl}
         />
       </CardHeader>
-      <CardBody className='overflow-visible space-y-2'>
+      <CardBody className='space-y-2 overflow-visible'>
         <Chip variant='faded' color='primary' size='sm'>
           {tag}
         </Chip>
@@ -58,7 +57,7 @@ export default function CourseCard({
             src: userImage,
           }}
         />
-        <p className='text-primary text-3xl font-bold'>${price}</p>
+        <p className='text-3xl font-bold text-primary'>${price}</p>
       </CardFooter>
     </Card>
   );

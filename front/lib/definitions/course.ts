@@ -13,7 +13,7 @@ export type Course = {
   profiles: { last_name: string; first_name: string; avatar_url: string };
   module: Module[];
   duration: string;
-  enrollments: string[];
+  enrollments: { student_id: string }[];
 };
 
 export type Module = {

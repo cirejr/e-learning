@@ -39,8 +39,6 @@ export default function CourseFilters({ courses }: { courses: Course[] }) {
         switch (sortBy) {
           case 'title':
             return a.title.localeCompare(b.title);
-          case 'newest':
-            return b.id - a.id;
           default:
             return 0;
         }

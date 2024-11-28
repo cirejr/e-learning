@@ -73,14 +73,18 @@ export default async function CourseDetails({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const [course, authedUser] = (await Promise.all([
-    getCourseById(searchParams.courseId as string),
+    getCourseById(searchParams.id as string),
     getUser(),
   ])) as [Course, User];
 
   let isAuthedUser = false;
-  /* if (course.enrollments.includes(authedUser.id)) {
+  if (
+    course.enrollments.some(
+      (enrollment) => enrollment.student_id === authedUser.id
+    )
+  ) {
     isAuthedUser = true;
-  } */
+  }
 
   return (
     <div className='container mx-auto px-4 py-8'>
@@ -142,8 +146,12 @@ export default async function CourseDetails({
             </CardContent>
             <CardFooter>
               {isAuthedUser ? (
-                <Button className='w-full' size='lg' asChild>
-                  <Link href={`/${course.url}`}>
+                <Button
+                  className='w-full'
+                  size='lg'
+                  disabled={course?.url === undefined || null ? true : false}
+                >
+                  <Link href={`/${course.url}`} className='flex'>
                     <Video className='mr-2 h-4 w-4' /> Rejoindre le cours en
                     ligne
                   </Link>
@@ -155,15 +163,6 @@ export default async function CourseDetails({
           </Card>
         </div>
         <div className='space-y-6'>
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Progression du cours</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Progress value={course.progress} className='w-full' />
-              <p className='mt-2 text-center'>{course.progress}% complété</p>
-            </CardContent>
-          </Card> */}
           <Card>
             <CardHeader>
               <CardTitle>Enseignants</CardTitle>
