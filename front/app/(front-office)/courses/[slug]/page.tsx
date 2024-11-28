@@ -27,46 +27,6 @@ import EnrollmentButton from '../_components/enrollment-button';
 import { getUser } from '@/data-access/data';
 import { User } from '@supabase/supabase-js';
 
-interface Teacher {
-  first_name: string;
-  last_name: string;
-  avatar_url: string;
-}
-
-/* const course: Course = {
-  id: '1',
-  title: "Journalisme d'Investigation Avancé",
-  description:
-    "Approfondissez vos compétences en journalisme d'investigation avec ce cours avancé. Apprenez les techniques modernes de recherche, d'analyse de données et de reportage éthique.",
-  duration: '12 semaines',
-  level: 'Avancé',
-  students_enrolled: 45,
-  thumbnail_url: '/placeholder.svg?height=400&width=600',
-  course_link: 'https://zoom.us/j/example',
-  teachers: [
-    {
-      first_name: 'Marie',
-      last_name: 'Dupont',
-      avatar_url: '/placeholder.svg?height=100&width=100&text=MD',
-    },
-    {
-      first_name: 'Jean',
-      last_name: 'Martin',
-      avatar_url: '/placeholder.svg?height=100&width=100&text=JM',
-    },
-  ],
-  start_date: '2024-09-01',
-  syllabus: [
-    "Introduction au journalisme d'investigation",
-    'Techniques de recherche avancées',
-    'Analyse de données et visualisation',
-    "Éthique et légalité dans le journalisme d'investigation",
-    "Rédaction de reportages d'investigation",
-    'Sécurité numérique pour journalistes',
-  ],
-  progress: 65,
-}; */
-
 export default async function CourseDetails({
   searchParams,
 }: {
@@ -79,6 +39,7 @@ export default async function CourseDetails({
 
   let isAuthedUser = false;
   if (
+    authedUser != null &&
     course.enrollments.some(
       (enrollment) => enrollment.student_id === authedUser.id
     )
@@ -157,7 +118,10 @@ export default async function CourseDetails({
                   </Link>
                 </Button>
               ) : (
-                <EnrollmentButton courseId={course.id as string} />
+                <EnrollmentButton
+                  courseId={course.id as string}
+                  isUser={isAuthedUser}
+                />
               )}
             </CardFooter>
           </Card>

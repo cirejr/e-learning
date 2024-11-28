@@ -1,3 +1,4 @@
+import { sendCredententials } from '@/lib/actions/email';
 import { generatePassword } from '@/lib/utils';
 import { createAdminClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
@@ -28,7 +29,9 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log('data', data);
+    const name = userData.first_name + ' ' + userData.last_name;
+
+    await sendCredententials(name, userData.email, password);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
