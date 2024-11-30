@@ -63,3 +63,36 @@ export async function getCourseById(id: string) {
 
   return data.length > 0 ? data[0] : null;
 }
+
+export async function getEnrolledCourses(studentId: string) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('enrollments')
+    .select(
+      'courses(title, description, start_date, duration, code, profiles(first_name, last_name))'
+    )
+    .eq('student_id', studentId);
+
+  if (error) {
+    throw error;
+  }
+
+  const courses = data?.map((enrollment) => enrollment.courses) || [];
+
+  return courses;
+}
+
+export async function getTeacherCourses(teacherId: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from('courses')
+    .select('*')
+    .eq('teacher_id', teacherId);
+
+  if (error) {
+    throw error;
+  }
+
+  return data.length > 0 ? data : null;
+}

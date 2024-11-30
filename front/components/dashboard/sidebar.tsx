@@ -1,4 +1,4 @@
-import { PanelsTopLeft } from 'lucide-react';
+import { Camera, PanelsTopLeft } from 'lucide-react';
 
 import { Link } from 'next-view-transitions';
 import { cn } from '@/lib/utils';
@@ -30,16 +30,16 @@ export function Sidebar() {
           asChild
         >
           <Link href='/' className='flex items-center gap-2'>
-            <AcmeLogo />
+            <Camera className='h-6 w-6' />
             <h1
               className={cn(
-                'font-bold text-lg whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300',
+                'font-bold text-xl whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300',
                 sidebar?.isOpen === false
                   ? '-translate-x-96 opacity-0 hidden'
                   : 'translate-x-0 opacity-100'
               )}
             >
-              E-Learning
+              CFTS
             </h1>
           </Link>
         </Button>

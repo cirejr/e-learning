@@ -77,3 +77,19 @@ export async function getPostById(id: string) {
 
   return data.length > 0 ? data[0] : null;
 }
+
+export async function getMyPosts(id: string) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('post_with_reply_count')
+    .select('*, profiles(first_name, last_name), forum_topics(title)')
+    .order('post_created_at', { ascending: false })
+    .eq('author_id', id);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

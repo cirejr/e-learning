@@ -12,23 +12,22 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import ModalForm from '../modal-form';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableProps } from '@/lib/definitions/data-table';
 import { TableOptions } from './table-options';
 import SheetWrapper from '@/components/global/sheet-wrapper';
 import CourseCreationForm from '../create-course-form';
 import { UserForm } from '../admin/user-form';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 
 export function DataTableContent<TData, TValue>({
   formType,
   columns,
   data,
   teachers,
+  isStudent,
 }: DataTableProps<TData, TValue>) {
   const table = TableOptions({ columns, data });
-
   return (
     <div>
       <div className='flex items-center justify-between py-4'>
@@ -38,22 +37,24 @@ export function DataTableContent<TData, TValue>({
           onChange={(event) => table.setGlobalFilter(event.target.value)}
           className='max-w-sm'
         />
-        <SheetWrapper
-          title={
-            formType == 'course'
-              ? 'Créer une nouveau cours'
-              : 'Créer un nouvel utilisateur'
-          }
-          triggerTitle={
-            formType == 'course' ? 'Nouveau cours' : 'Nouvel utilisateur'
-          }
-        >
-          {formType == 'course' ? (
-            <CourseCreationForm teachers={teachers as User[]} />
-          ) : (
-            <UserForm />
-          )}
-        </SheetWrapper>
+        {!isStudent && (
+          <SheetWrapper
+            title={
+              formType == 'course'
+                ? 'Créer une nouveau cours'
+                : 'Créer un nouvel utilisateur'
+            }
+            triggerTitle={
+              formType == 'course' ? 'Nouveau cours' : 'Nouvel utilisateur'
+            }
+          >
+            {formType == 'course' ? (
+              <CourseCreationForm teachers={teachers as User[]} />
+            ) : (
+              <UserForm />
+            )}
+          </SheetWrapper>
+        )}
         {/* <ModalForm formType={formType} teachers={teachers} /> */}
       </div>
       <div className='rounded-md border'>

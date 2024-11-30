@@ -3,9 +3,9 @@ export type User = {
   email: string;
   first_name: string;
   last_name: string;
-  status: string;
+  status?: string;
   role: 'admin' | 'teacher' | 'student';
-  password: string;
-  createdAt: string;
-  updatedAt: string;
+  password?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };

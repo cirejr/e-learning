@@ -120,7 +120,7 @@ export default async function CourseDetails({
               ) : (
                 <EnrollmentButton
                   courseId={course.id as string}
-                  isUser={isAuthedUser}
+                  isUser={authedUser ? true : false}
                 />
               )}
             </CardFooter>

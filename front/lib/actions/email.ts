@@ -12,7 +12,7 @@ export async function sendCredententials(
 
   const { data, error } = await resend.emails.send({
     from: 'CFTS <onboarding@resend.dev>',
-    to: [email],
+    to: 'juniorcireba@gmail.com',
     subject: 'Vos identifiants',
     react: CredentielsEmail({ name, email, password }),
   });

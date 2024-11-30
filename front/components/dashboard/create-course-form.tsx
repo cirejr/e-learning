@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format, isAfter, isValid } from 'date-fns';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,7 +19,7 @@ import {
 
 import { courseSchema } from '@/lib/schemas/course';
 import { Course } from '@/lib/definitions/course';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 import {
   Select,
   SelectContent,
@@ -28,8 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { CalendarIcon, Clock } from 'lucide-react';
-import { cn, generateCourseCode } from '@/lib/utils';
 import { createCourse, updateCourse } from '@/lib/actions/course';
 
 import { DatetimePicker } from '@/components/ui/datetime-picker';
@@ -228,7 +225,7 @@ export default function CourseCreationForm({
                       className='capitalize'
                       id={teach.id}
                       value={teach.id}
-                    >{`${teach.first_name} ${teach.last_name}`}</SelectItem>
+                    >{`${teach.user_metadata.first_name} ${teach.user_metadata.last_name}`}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

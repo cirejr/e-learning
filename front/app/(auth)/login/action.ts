@@ -12,16 +12,21 @@ export async function login(formData: FormData) {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   };
+  try {
+    const { data: authData, error } = await supabase.auth.signInWithPassword(
+      dataToSend
+    );
 
-  const { data: authData, error } = await supabase.auth.signInWithPassword(
-    dataToSend
-  );
+    if (error) {
+      return { error: error.message };
+    }
 
-  if (error) {
-    return { error: error.message };
+    return { success: true, user: authData.user };
+  } catch (error) {
+    return { error: error };
+  } finally {
+    redirect('/dashboard');
   }
-
-  return { success: true, user: authData.user };
 }
 
 export async function signup(formData: FormData) {

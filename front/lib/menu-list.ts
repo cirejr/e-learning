@@ -33,13 +33,13 @@ export function getMenuList(pathname: string): Group[] {
       {
         groupLabel: 'Contents',
         menus: [
-          {
+          /* {
             href: '/admin',
             label: 'Dashboard',
             active: pathname === '/admin',
             icon: LayoutGrid,
             submenus: [],
-          },
+          }, */
           {
             href: '/admin/users',
             label: 'users',
@@ -88,13 +88,13 @@ export function getMenuList(pathname: string): Group[] {
       {
         groupLabel: 'Contents',
         menus: [
-          {
+          /* {
             href: '/dashboard',
             label: 'Dashboard',
             active: pathname === '/dashboard',
             icon: LayoutGrid,
             submenus: [],
-          },
+          }, */
           {
             href: '/dashboard/courses',
             label: 'Courses',
