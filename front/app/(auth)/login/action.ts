@@ -22,8 +22,11 @@ export async function login(formData: FormData) {
     }
 
     return { success: true, user: authData.user };
-  } catch (error) {
-    return { error: error };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return { error: error.message };
+    }
+    return { error: 'An unknown error occurred' };
   } finally {
     redirect('/dashboard');
   }
