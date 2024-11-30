@@ -1,11 +1,28 @@
+import React from 'react';
 import Breadcrumbs from '@/components/dashboard/breadcrumbs';
 import { ContentLayout } from '@/components/dashboard/content-layout';
-import React from 'react';
+import { columns } from '@/components/dashboard/tables/courses/columns';
+import { DataTableContent } from '@/components/dashboard/tables/data-table-content';
+import { getCourses, getTeachers } from '@/data-access/data';
+import { Course } from '@/lib/definitions/course';
+import { User } from '@supabase/supabase-js';
 
-export default function Courses() {
+export default async function Courses() {
+  //const courses = await getCourses() as unknown as Course[]
+  const [teachers, courses] = (await Promise.all([
+    getTeachers(),
+    getCourses(),
+  ])) as [User[], Course[]];
   return (
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Courses'>
-      <Breadcrumbs />
+      <main>
+        <DataTableContent
+          columns={columns}
+          data={courses}
+          formType='course'
+          teachers={teachers}
+        />
+      </main>
     </ContentLayout>
   );
 }

@@ -9,7 +9,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       {children}
       <ProgressBar
         height='4px'
-        color='#5C24D3'
+        color='#10b981'
         options={{ showSpinner: false }}
         shallowRouting
       />

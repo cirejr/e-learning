@@ -8,7 +8,7 @@ import {
   NavbarItem,
   Link as NextLink,
 } from '@nextui-org/react';
-import { AcmeLogo } from './acme-logo';
+import { AcmeLogo } from '../../app/(template)/template/_components/acme-logo';
 import { Button } from '../ui/button';
 import { Link } from 'next-view-transitions';
 
@@ -19,53 +19,23 @@ export default function GlobalNavbar() {
         <AcmeLogo />
         <p className='font-bold text-inherit'>ACME</p>
       </NavbarBrand>
-      <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-        <NavbarItem isActive>
-          <Link color='foreground' href='/' aria-current='page'>
+      <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
+        <NavbarItem>
+          <NextLink href='/' aria-current='page'>
             Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <NextLink href='/about-us' isDisabled>
-            About us
           </NextLink>
-          <Chip
-            size='sm'
-            variant='flat'
-            color='danger'
-            className='ml-1 translate-y-[-10px]'
-          >
-            soon
-          </Chip>
         </NavbarItem>
         <NavbarItem>
-          <NextLink href='/courses' isDisabled>
-            Courses
-          </NextLink>
-          <Chip
-            size='sm'
-            variant='flat'
-            color='danger'
-            className='ml-1 translate-y-[-10px]'
-          >
-            soon
-          </Chip>
+          <NextLink href='/about-us'>About us</NextLink>
         </NavbarItem>
         <NavbarItem>
-          <NextLink href='/contact' isDisabled>
-            Contact us
-          </NextLink>
-          <Chip
-            size='sm'
-            variant='flat'
-            color='danger'
-            className='ml-1 translate-y-[-10px]'
-          >
-            soon
-          </Chip>
+          <NextLink href='/courses'>Courses</NextLink>
         </NavbarItem>
         <NavbarItem>
-          <Link href='/admin'>Dashboard</Link>
+          <NextLink href='/contact'>Contact us</NextLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NextLink href='/admin'>Dashboard</NextLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end' className='gap-2'>
@@ -73,7 +43,7 @@ export default function GlobalNavbar() {
           <Button
             asChild
             variant={'secondary'}
-            className='bg-primary-foreground text-primary '
+            className='bg-primary-foreground text-primary'
           >
             <Link href='/login'>Login</Link>
           </Button>

@@ -5,6 +5,7 @@ import {
   Bookmark,
   SquarePen,
   LayoutGrid,
+  Files,
 } from 'lucide-react';
 
 type Submenu = {
@@ -13,7 +14,7 @@ type Submenu = {
   active: boolean;
 };
 
-type Menu = {
+export type Menu = {
   href: string;
   label: string;
   active: boolean;
@@ -21,91 +22,107 @@ type Menu = {
   submenus: Submenu[];
 };
 
-type Group = {
+export type Group = {
   groupLabel: string;
   menus: Menu[];
 };
 
 export function getMenuList(pathname: string): Group[] {
-  return [
-    {
-      groupLabel: '',
-      menus: [
-        {
-          href: '/admin',
-          label: 'Dashboard',
-          active: pathname.includes('/admin'),
-          icon: LayoutGrid,
-          submenus: [],
-        },
-      ],
-    },
-    {
-      groupLabel: 'Contents',
-      menus: [
-        {
-          href: '',
-          label: 'users',
-          active: pathname.includes('/users'),
-          icon: Users,
-          submenus: [
-            {
-              href: '/admin/users',
-              label: 'All Users',
-              active: pathname === '/admin/users',
-            },
-            {
-              href: '/admin/users/create',
-              label: 'New User',
-              active: pathname === '/users/create',
-            },
-          ],
-        },
-        {
-          href: '',
-          label: 'Courses',
-          active: pathname.includes('/courses'),
-          icon: Bookmark,
-          submenus: [
-            {
-              href: '/admin/courses',
-              label: 'All Courses',
-              active: pathname === '/admin/courses',
-            },
-            {
-              href: '/admin/courses/create',
-              label: 'New Course',
-              active: pathname === '/admin/courses/create',
-            },
-          ],
-        },
-        {
-          href: '/admin/content-management',
-          label: 'Content Management',
-          active: pathname.includes('/content-management'),
-          icon: Tag,
-          submenus: [],
-        },
-      ],
-    },
-    {
-      groupLabel: 'Settings',
-      menus: [
-        /* {
-          href: '/users',
-          label: 'Users',
-          active: pathname.includes('/users'),
-          icon: Users,
-          submenus: [],
-        }, */
-        {
-          href: '/admin/account',
-          label: 'Account',
-          active: pathname.includes('/account'),
-          icon: Settings,
-          submenus: [],
-        },
-      ],
-    },
-  ];
+  if (pathname.includes('admin')) {
+    return [
+      {
+        groupLabel: 'Contents',
+        menus: [
+          /* {
+            href: '/admin',
+            label: 'Dashboard',
+            active: pathname === '/admin',
+            icon: LayoutGrid,
+            submenus: [],
+          }, */
+          {
+            href: '/admin/users',
+            label: 'users',
+            active: pathname.includes('/users'),
+            icon: Users,
+            submenus: [],
+          },
+          {
+            href: '/admin/courses',
+            label: 'Courses',
+            active: pathname.includes('/courses'),
+            icon: Bookmark,
+            submenus: [],
+          },
+          {
+            href: '/admin/applications',
+            label: 'Admissions',
+            active: pathname.includes('/applications'),
+            icon: Files,
+            submenus: [],
+          },
+          /* {
+            href: '/admin/content-management',
+            label: 'Content Management',
+            active: pathname.includes('/content-management'),
+            icon: Tag,
+            submenus: [],
+          }, */
+        ],
+      },
+      /*  {
+        groupLabel: 'Settings',
+        menus: [
+          {
+            href: '/admin/account',
+            label: 'Account',
+            active: pathname.includes('/account'),
+            icon: Settings,
+            submenus: [],
+          },
+        ],
+      }, */
+    ];
+  } else {
+    return [
+      {
+        groupLabel: 'Contents',
+        menus: [
+          /* {
+            href: '/dashboard',
+            label: 'Dashboard',
+            active: pathname === '/dashboard',
+            icon: LayoutGrid,
+            submenus: [],
+          }, */
+          {
+            href: '/dashboard/courses',
+            label: 'Courses',
+            active: pathname.includes('/courses'),
+            icon: Bookmark,
+            submenus: [],
+          },
+          {
+            href: '/dashboard/my-posts',
+            label: 'Mes Posts',
+            active: pathname.includes('/my-posts'),
+            icon: Tag,
+            submenus: [],
+          },
+        ],
+      },
+      {
+        groupLabel: 'Settings',
+        menus: [
+          {
+            href: '/dashboard/account',
+            label: 'Compte',
+            active: pathname.includes('/account'),
+            icon: Settings,
+            submenus: [],
+          },
+        ],
+      },
+    ];
+  }
 }

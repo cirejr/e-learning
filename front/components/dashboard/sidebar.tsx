@@ -1,4 +1,4 @@
-import { PanelsTopLeft } from 'lucide-react';
+import { Camera, PanelsTopLeft } from 'lucide-react';
 
 import { Link } from 'next-view-transitions';
 import { cn } from '@/lib/utils';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Menu } from '@/components/dashboard/menu';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 import { SidebarToggle } from '@/components/dashboard/sidebar-toggle';
-import { AcmeLogo } from '../global/acme-logo';
+import { AcmeLogo } from '../../app/(template)/template/_components/acme-logo';
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
@@ -20,7 +20,7 @@ export function Sidebar() {
       )}
     >
       <SidebarToggle isOpen={sidebar?.isOpen} setIsOpen={sidebar?.setIsOpen} />
-      <div className='relative h-full flex flex-col px-3 py-4 overflow-y-auto shadow-md dark:shadow-zinc-800'>
+      <div className='relative flex h-full flex-col overflow-y-auto px-3 py-4 shadow-md dark:shadow-zinc-800'>
         <Button
           className={cn(
             'transition-transform ease-in-out duration-300 mb-1',
@@ -30,16 +30,16 @@ export function Sidebar() {
           asChild
         >
           <Link href='/' className='flex items-center gap-2'>
-            <AcmeLogo />
+            <Camera className='h-6 w-6' />
             <h1
               className={cn(
-                'font-bold text-lg whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300',
+                'font-bold text-xl whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300',
                 sidebar?.isOpen === false
                   ? '-translate-x-96 opacity-0 hidden'
                   : 'translate-x-0 opacity-100'
               )}
             >
-              E-Learning
+              CFTS
             </h1>
           </Link>
         </Button>

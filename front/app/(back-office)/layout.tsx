@@ -4,8 +4,9 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@/hooks/use-store';
 import { Sidebar } from '@/components/dashboard/sidebar';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
+import '@/styles/globals.css';
 
-export default function DashboardLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;

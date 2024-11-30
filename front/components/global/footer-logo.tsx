@@ -1,5 +1,5 @@
 import React from 'react';
-import { AcmeLogo } from './acme-logo';
+import { AcmeLogo } from '../../app/(template)/template/_components/acme-logo';
 
 export default function FooterLogo() {
   return (

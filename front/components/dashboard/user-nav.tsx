@@ -20,8 +20,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { logout } from '@/data-access/data';
+import { User as SupaUserProps } from '@supabase/supabase-js';
+import LogoutButton from './logout-button';
 
-export function UserNav() {
+export function UserNav({ user }: { user: SupaUserProps }) {
   return (
     <DropdownMenu>
       <TooltipProvider disableHoverableContent>
@@ -34,7 +37,10 @@ export function UserNav() {
               >
                 <Avatar className='h-8 w-8'>
                   <AvatarImage src='#' alt='Avatar' />
-                  <AvatarFallback className='bg-transparent'>JD</AvatarFallback>
+                  <AvatarFallback className='bg-transparent'>
+                    {user?.user_metadata?.first_name.charAt(0)}
+                    {user?.user_metadata?.last_name.charAt(0)}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
@@ -46,9 +52,9 @@ export function UserNav() {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>John Doe</p>
+            <p className='text-sm font-medium leading-none'>{`${user?.user_metadata?.first_name} ${user?.user_metadata?.last_name}`}</p>
             <p className='text-xs leading-none text-muted-foreground'>
-              johndoe@example.com
+              {user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -56,21 +62,20 @@ export function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem className='hover:cursor-pointer' asChild>
             <Link href='/dashboard' className='flex items-center'>
-              <LayoutGrid className='w-4 h-4 mr-3 text-muted-foreground' />
+              <LayoutGrid className='mr-3 h-4 w-4 text-muted-foreground' />
               Dashboard
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className='hover:cursor-pointer' asChild>
             <Link href='/account' className='flex items-center'>
-              <User className='w-4 h-4 mr-3 text-muted-foreground' />
+              <User className='mr-3 h-4 w-4 text-muted-foreground' />
               Account
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className='hover:cursor-pointer' onClick={() => {}}>
-          <LogOut className='w-4 h-4 mr-3 text-muted-foreground' />
-          Sign out
+        <DropdownMenuItem className='hover:cursor-pointer' asChild>
+          <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

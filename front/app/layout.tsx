@@ -13,7 +13,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: 'E-Learning',
+  title: 'CFTS',
   description: 'The best online school website',
 };
 
@@ -33,7 +33,10 @@ export default function RootLayout({
           )}
         >
           <Providers>{children}</Providers>
-          <Toaster closeButton richColors />
+          <Toaster
+            position='top-right'
+            className='font-sans text-xl font-normal'
+          />
         </body>
       </html>
     </ViewTransitions>
