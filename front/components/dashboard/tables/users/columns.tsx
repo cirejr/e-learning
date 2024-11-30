@@ -30,7 +30,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 import { DataTableColumnHeader } from '../data-table-column-header';
 import ModalForm from '../../modal-form';
 import { DeleteModal } from '../../delete-modal';
@@ -86,10 +86,7 @@ export const columns: ColumnDef<User>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild>
-              <ModalForm
-                formType='user'
-                user={user}
-              />
+              <ModalForm formType='user' user={user} />
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <DeleteModal deleteFn={() => deleteUser(user.id)} />

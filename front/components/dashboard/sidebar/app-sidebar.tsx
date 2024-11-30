@@ -5,6 +5,7 @@ import {
   Bird,
   BookOpen,
   Bot,
+  Camera,
   Code2,
   Eclipse,
   Frame,
@@ -35,9 +36,10 @@ import {
   SidebarLabel,
 } from '@/components/ui/sidebar';
 import { Link } from 'next-view-transitions';
-import { AcmeLogo } from '@/components/global/acme-logo';
+import { AcmeLogo } from '@/app/(template)/template/_components/acme-logo';
 import { usePathname } from 'next/navigation';
 import { getMenuList } from '@/lib/menu-list';
+import LogoutButton from '../logout-button';
 const data = {
   teams: [
     {
@@ -257,11 +259,9 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <Link href='/' className='flex items-center gap-2'>
-          <AcmeLogo />
-          <h1 className='whitespace-nowrap text-lg font-bold transition-[transform,opacity,display] duration-300 ease-in-out'>
-            E-Learning
-          </h1>
+        <Link href='/' className='flex items-center space-x-2'>
+          <Camera className='h-6 w-6' />
+          <span className='text-xl font-bold'>CFTS</span>
         </Link>
       </SidebarHeader>
       <SidebarContent>
@@ -277,7 +277,7 @@ export function AppSidebar() {
         </SidebarItem>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <LogoutButton />
       </SidebarFooter>
     </Sidebar>
   );

@@ -21,8 +21,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { logout } from '@/data-access/data';
+import { User as SupaUserProps } from '@supabase/supabase-js';
+import LogoutButton from './logout-button';
 
-export function UserNav({ user }: { user: any }) {
+export function UserNav({ user }: { user: SupaUserProps }) {
   return (
     <DropdownMenu>
       <TooltipProvider disableHoverableContent>
@@ -36,8 +38,8 @@ export function UserNav({ user }: { user: any }) {
                 <Avatar className='h-8 w-8'>
                   <AvatarImage src='#' alt='Avatar' />
                   <AvatarFallback className='bg-transparent'>
-                    {user?.user?.first_name.charAt(0)}
-                    {user?.user?.last_name.charAt(0)}
+                    {user?.user_metadata?.first_name.charAt(0)}
+                    {user?.user_metadata?.last_name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -50,7 +52,7 @@ export function UserNav({ user }: { user: any }) {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>{`${user?.user?.first_name} ${user?.user?.last_name}`}</p>
+            <p className='text-sm font-medium leading-none'>{`${user?.user_metadata?.first_name} ${user?.user_metadata?.last_name}`}</p>
             <p className='text-xs leading-none text-muted-foreground'>
               {user?.email}
             </p>
@@ -72,14 +74,8 @@ export function UserNav({ user }: { user: any }) {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className='hover:cursor-pointer'
-          onClick={() => {
-            logout();
-          }}
-        >
-          <LogOut className='mr-3 h-4 w-4 text-muted-foreground' />
-          Sign out
+        <DropdownMenuItem className='hover:cursor-pointer' asChild>
+          <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,16 +1,18 @@
 'use server';
 
 import { createClient } from '@/utils/supabase/server';
+import { revalidatePath } from 'next/cache';
 
 export async function logout() {
   const supabase = createClient();
   const { error } = await supabase.auth.signOut();
-
   if (error) {
     throw error;
   }
-}
 
+  revalidatePath('/login');
+}
+/* 
 export async function getUserData() {
   const supabase = createClient();
 
@@ -37,28 +39,27 @@ export async function getUserData() {
     ...user,
     profile: userData,
   };
-}
+} */
 
 export async function getUser() {
   const supabase = createClient();
 
-  const res = await supabase.auth.getUser();
-
-  if (res.error) {
-    return res.error;
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    return null;
   }
-  return res.data;
+  return data.user;
 }
 
 export async function getCourses() {
   const supabase = createClient();
-
-  try {
-    const response = await supabase.from('courses').select('*');
-    return response.data;
-  } catch (error) {
+  const { data, error } = await supabase
+    .from('courses')
+    .select('*, profiles(first_name, last_name)');
+  if (error) {
     return error;
   }
+  return data;
 }
 
 export async function getTeachers() {

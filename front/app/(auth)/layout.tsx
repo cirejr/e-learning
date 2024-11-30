@@ -4,7 +4,7 @@ import '@/styles/globals.css';
 
 import { cn } from '@/lib/utils';
 import GlobalNavbar from '@/components/global/global-navbar';
-import Footer from '@/components/global/footer';
+import Footer from '@/app/(template)/template/_components/footer';
 import RightSide from '@/components/auth/right-side';
 
 const fontSans = FontSans({

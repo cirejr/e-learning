@@ -2,40 +2,31 @@
 
 import { z } from 'zod';
 import { userSchema } from '../schemas/user';
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient, createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
-import { error } from 'console';
+import { sendCredententials } from './email';
 
-const supabase = createClient();
+export async function signUp(formData: FormData) {
+  const supabase = createClient();
+  const dataToSend = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  };
 
-export async function createUser(userData: z.infer<typeof userSchema>) {
-  try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .insert({
-        email: userData.email,
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        role: userData.role,
-        password: userData.password,
-      })
-      .select()
-      .single();
+  const { data, error } = await supabase.auth.signUp(dataToSend);
 
-    if (error) throw error;
-
-    return { success: true };
-  } catch (error) {
-    return { error: error };
-  } finally {
-    revalidatePath('/admin/users', 'page');
+  if (error) {
+    throw error;
   }
+
+  return data;
 }
 
 export async function updateUser(
   userId: string,
   data: z.infer<typeof userSchema>
 ) {
+  const supabase = createClient();
   try {
     const response = await supabase
       .from('profiles')
@@ -55,6 +46,7 @@ export async function updateUser(
 }
 
 export async function deleteUser(userId: string) {
+  const supabase = createClient();
   try {
     const res = await supabase.from('profiles').delete().eq('id', userId);
     return res;

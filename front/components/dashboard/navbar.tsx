@@ -2,8 +2,7 @@ import { ModeToggle } from '@/components/global/mode-toggle';
 import { UserNav } from '@/components/dashboard/user-nav';
 import { SheetMenu } from '@/components/dashboard/sheet-menu';
 import { SidebarTrigger } from '../ui/sidebar';
-import { NavUser } from './sidebar/nav-user';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 
 interface NavbarProps {
   breadcrumb: React.ReactNode;

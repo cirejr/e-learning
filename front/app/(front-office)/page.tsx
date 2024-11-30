@@ -1,19 +1,17 @@
-import BlogSection from '@/components/global/blog-section';
-import CoursesSection from '@/components/global/courses-section';
-import HeroSection from '@/components/global/hero-section';
-import Services from '@/components/global/services-section';
-import TeamMembers from '@/components/global/team-member-section';
-import Testimony from '@/components/global/testimony';
+import CTA from '@/components/global/cta';
+import { Features } from '@/components/global/features';
+import { Hero } from '@/components/global/hero';
+import Overview from '@/components/global/overview';
+import { Programs } from '@/components/global/program';
 
 export default function Home() {
   return (
     <main className=''>
-      <HeroSection />
-      <Services />
-      <CoursesSection />
-      <TeamMembers />
-      <Testimony />
-      <BlogSection />
+      <Hero />
+      <Overview />
+      <Features />
+      <Programs />
+      <CTA />
     </main>
   );
 }

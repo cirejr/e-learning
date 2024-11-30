@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { UserForm } from './admin/user-form';
 import { Icons } from '../ui/icons';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 import { Course } from '@/lib/definitions/course';
 import CourseCreationForm from './create-course-form';
 
@@ -19,14 +19,14 @@ type ModalFormProps = {
   user?: User;
   course?: Course;
   formType: 'user' | 'course';
-  teachers?: User[]
+  teachers?: User[];
 };
 
 export default function ModalForm({
   user,
   course,
   formType,
-  teachers = []
+  teachers = [],
 }: ModalFormProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -45,7 +45,8 @@ export default function ModalForm({
         <AlertDialogHeader>
           <div className='flex items-center justify-between'>
             <AlertDialogTitle>
-            Ajouter un {formType == 'user' ? 'utilisateur' : 'cours'}</AlertDialogTitle>
+              Ajouter un {formType == 'user' ? 'utilisateur' : 'cours'}
+            </AlertDialogTitle>
             <Button
               variant='ghost'
               className='hover:bg-red-200 hover:text-red-500'

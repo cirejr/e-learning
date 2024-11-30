@@ -39,7 +39,7 @@ export async function createCourse(courseData: z.infer<typeof courseSchema>) {
 }
 
 export async function updateCourse(
-  courseId: number,
+  courseId: string,
   courseData: z.infer<typeof courseSchema>
 ) {
   const dataToSend = {
@@ -72,7 +72,7 @@ export async function updateCourse(
   }
 }
 
-export async function deleteCourse(courseId: number) {
+export async function deleteCourse(courseId: number | string) {
   try {
     const res = await supabase.from('courses').delete().eq('id', courseId);
 
@@ -81,5 +81,26 @@ export async function deleteCourse(courseId: number) {
     return error;
   } finally {
     revalidatePath('/admin/courses', 'page');
+  }
+}
+
+export async function enrollUser(courseId: string) {
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase.from('enrollments').insert({
+      course_id: courseId,
+      student_id: (await supabase.auth.getUser()).data.user?.id,
+    });
+
+    if (error) {
+      console.log('error:', error);
+      return { error: error };
+    }
+    return { success: true };
+  } catch (error) {
+    console.log('error:', error);
+    return { error: error };
+  } finally {
+    revalidatePath('/courses', 'page');
   }
 }

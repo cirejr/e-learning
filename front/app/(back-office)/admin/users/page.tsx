@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/dashboard/breadcrumbs';
 import UsersTable from '@/components/dashboard/tables/users/data-table';
 import { columns } from '@/components/dashboard/tables/users/columns';
 import { createClient } from '@/utils/supabase/server';
-import { User } from '@/lib/definitions/user';
+import { User } from '@supabase/supabase-js';
 
 async function getUsers() {
   'use server';

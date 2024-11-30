@@ -1,6 +1,8 @@
 import { AppSidebar } from '@/components/dashboard/sidebar/app-sidebar';
 import { SidebarLayout } from '@/components/ui/sidebar';
 
+import '@/styles/globals.css';
+
 export default async function DashboardLayout({
   children,
 }: {
