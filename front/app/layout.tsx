@@ -26,6 +26,16 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang='en'>
         <head />
+        <meta property='og:image' content='/opengraph-image.png' />
+        <meta property='og:image:type' content='image/png' />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
+
+        <meta name='twitter:image' content='/twitter-image.png' />
+        <meta name='twitter:image:type' content='image/png' />
+        <meta name='twitter:image:width' content='1200' />
+        <meta name='twitter:image:height' content='630' />
+
         <body
           className={cn(
             'min-h-screen bg-background font-sans antialiased',
