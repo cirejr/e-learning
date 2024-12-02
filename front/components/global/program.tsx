@@ -37,11 +37,6 @@ export async function Programs() {
                 <p className='mb-4 text-muted-foreground'>
                   {program.description}
                 </p>
-                <Button variant='outline' className='w-full' asChild>
-                  <Link href={`/courses/${program.title.toLowerCase()}`}>
-                    Learn More <ArrowRight className='ml-2 h-4 w-4' />
-                  </Link>
-                </Button>
               </CardContent>
             </Card>
           ))}
