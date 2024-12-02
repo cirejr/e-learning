@@ -31,10 +31,17 @@ export default function RootLayout({
         <meta property='og:image:width' content='1200' />
         <meta property='og:image:height' content='630' />
 
+        <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image' content='/twitter-image.png' />
         <meta name='twitter:image:type' content='image/png' />
         <meta name='twitter:image:width' content='1200' />
         <meta name='twitter:image:height' content='630' />
+        <meta name='twitter:title' content='CFTS' />
+        <meta
+          name='twitter:description'
+          content='The best online Journalism Training Center.'
+        />
+        <meta name='twitter:site' content='@cirejr_' />
 
         <body
           className={cn(
