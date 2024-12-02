@@ -259,7 +259,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <Link href='/' className='flex items-center space-x-2'>
+        <Link href='/' className='my-1 flex items-center space-x-2'>
           <Camera className='h-6 w-6' />
           <span className='text-xl font-bold'>CFTS</span>
         </Link>

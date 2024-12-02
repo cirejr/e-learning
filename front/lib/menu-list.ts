@@ -49,7 +49,7 @@ export function getMenuList(pathname: string): Group[] {
           },
           {
             href: '/admin/courses',
-            label: 'Courses',
+            label: 'Cours',
             active: pathname.includes('/courses'),
             icon: Bookmark,
             submenus: [],
@@ -97,7 +97,7 @@ export function getMenuList(pathname: string): Group[] {
           }, */
           {
             href: '/dashboard/courses',
-            label: 'Courses',
+            label: 'Mes Cours',
             active: pathname.includes('/courses'),
             icon: Bookmark,
             submenus: [],
