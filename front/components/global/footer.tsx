@@ -21,7 +21,7 @@ export default function Footer() {
               <ul className='space-y-2 text-sm'>
                 <li>
                   <Link
-                    href='/courses/journalism'
+                    href='/courses'
                     className='text-muted-foreground hover:text-foreground'
                   >
                     Journalism
@@ -29,7 +29,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/courses/digital-media'
+                    href='#'
                     className='text-muted-foreground hover:text-foreground'
                   >
                     Digital Media
@@ -37,7 +37,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/courses/broadcasting'
+                    href='/courses'
                     className='text-muted-foreground hover:text-foreground'
                   >
                     Broadcasting
@@ -58,7 +58,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/library'
+                    href='#'
                     className='text-muted-foreground hover:text-foreground'
                   >
                     Digital Library
@@ -66,7 +66,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/events'
+                    href='#'
                     className='text-muted-foreground hover:text-foreground'
                   >
                     Events
