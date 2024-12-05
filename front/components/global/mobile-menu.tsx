@@ -17,6 +17,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { User } from '@supabase/supabase-js';
 import { cn } from '@/lib/utils';
+import LogoutButton from '../dashboard/logout-button';
 
 export default function MobileMenu({
   user,
@@ -39,29 +40,34 @@ export default function MobileMenu({
         </SheetHeader>
         <nav className='my-3 flex flex-1 flex-col items-center justify-center space-y-4'>
           {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'text-sm font-medium transition-colors hover:text-primary',
-                pathname === item.href
-                  ? 'text-foreground'
-                  : 'text-muted-foreground'
-              )}
-            >
-              {item.name}
-            </Link>
+            <SheetClose key={item.href} asChild>
+              <Link
+                href={item.href}
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  pathname === item.href
+                    ? 'text-foreground'
+                    : 'text-muted-foreground'
+                )}
+              >
+                {item.name}
+              </Link>
+            </SheetClose>
           ))}
         </nav>
         <SheetFooter>
           {user ? (
-            <Button asChild>
-              <Link className='' href='/dashboard'>
-                Dashboard
-              </Link>
-            </Button>
+            <>
+              <LogoutButton />
+
+              <Button asChild className='my-2'>
+                <Link className='' href='/dashboard'>
+                  Dashboard
+                </Link>
+              </Button>
+            </>
           ) : (
-            <div className='flex items-center space-x-4'>
+            <div className='flex flex-col items-center gap-3 space-x-4'>
               <Button variant='outline' asChild>
                 <Link href='/login'>Log in</Link>
               </Button>

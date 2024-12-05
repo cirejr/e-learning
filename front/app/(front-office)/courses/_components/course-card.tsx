@@ -11,12 +11,14 @@ export function CourseCard({ course }: { course: Course }) {
   return (
     <Card className='flex flex-col overflow-hidden'>
       <div className='relative aspect-video'>
-        <Image
-          fill
-          src={course.thumbnail_url}
-          alt={course.title}
-          className='absolute inset-0 h-full w-full object-cover'
-        />
+        <Link href={`/courses/${course.code}?id=${course.id}`}>
+          <Image
+            fill
+            src={course.thumbnail_url}
+            alt={course.title}
+            className='absolute inset-0 h-full w-full object-cover'
+          />
+        </Link>
       </div>
       <CardHeader>
         <CardTitle className='line-clamp-2'>{course.title}</CardTitle>

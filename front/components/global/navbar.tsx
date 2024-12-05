@@ -47,7 +47,7 @@ export default function Navbar({ user }: { user: User }) {
             <Link href='/dashboard'>Dashboard</Link>
           </Button>
         ) : (
-          <div className='flex items-center space-x-4'>
+          <div className='hidden items-center space-x-4 md:flex'>
             <Button variant='outline' asChild>
               <Link href='/login'>Log in</Link>
             </Button>

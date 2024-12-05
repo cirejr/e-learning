@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 
 export default function MainContent() {
   return (
-    <>
-      <div className='flex-1 space-y-4 p-8 pt-6'>
+    <main>
+      <div className='w-fit flex-1 space-y-4 p-8 pt-6'>
         <Tabs defaultValue='overview' className='space-y-4'>
           <TabsList>
             <TabsTrigger value='overview'>Overview</TabsTrigger>
@@ -163,6 +163,6 @@ export default function MainContent() {
           </TabsContent>
         </Tabs>
       </div>
-    </>
+    </main>
   );
 }
