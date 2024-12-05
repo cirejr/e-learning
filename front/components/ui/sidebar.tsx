@@ -16,7 +16,7 @@ type SidebarContext = {
   onOpenChange: (open: boolean) => void;
 };
 
-const SidebarContext = React.createContext<SidebarContext>({
+export const SidebarContext = React.createContext<SidebarContext>({
   state: 'open',
   open: true,
   onOpenChange: () => {},

@@ -22,7 +22,7 @@ export default function LoginPage() {
       </Link> */}
 
       <div className='col-span-2 flex h-full w-full items-center justify-center bg-slate-900 text-primary-foreground dark lg:p-8'>
-        <div className='mx-auto my-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
+        <div className='mx-auto my-auto flex w-full flex-col justify-center space-y-6 px-6 sm:w-[350px] sm:px-0'>
           <div className='flex flex-col space-y-2'>
             <h1 className='text-4xl font-semibold tracking-tight text-white'>
               Bienvenue

@@ -58,7 +58,7 @@ export default async function CourseDetails({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className='relative aspect-video h-64 w-full'>
+              <div className='relative h-64 w-full md:aspect-video'>
                 <Image
                   fill
                   src={course.thumbnail_url}
@@ -67,10 +67,12 @@ export default async function CourseDetails({
                 />
               </div>
               <CardDescription className='my-6 text-lg'>
-                <span className='mb-4 text-xl font-semibold text-foreground'>
-                  Description du cours
-                </span>
-                {course.description}
+                <div className='flex flex-col'>
+                  <span className='mb-4 text-xl font-semibold text-foreground'>
+                    Description du cours
+                  </span>
+                  {course.description}
+                </div>
               </CardDescription>
               <div className='mb-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
                 <div className='flex items-center'>
