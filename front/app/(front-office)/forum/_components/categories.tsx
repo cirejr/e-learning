@@ -13,7 +13,7 @@ export default async function Categories() {
         </CardHeader>
         <CardContent>
           <div className='space-y-4'>
-            {categories.map((category, index) => (
+            {categories.map((category: any, index: number) => (
               <div
                 key={index}
                 className='flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-muted'

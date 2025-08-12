@@ -1,78 +1,74 @@
 'use server';
 
-import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+
+export const getAccessToken = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
+  return accessToken;
+};
 
 export async function logout() {
-  const supabase = createClient();
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    throw error;
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
+
+  const res = await fetch(`${process.env.API_URL}/auth/logout`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  cookieStore.delete('access_token');
+  cookieStore.delete('refresh_token');
+
+  if (!res.ok) {
+    return { error: 'Failed to logout' };
   }
 
   revalidatePath('/login');
 }
-/* 
-export async function getUserData() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return null;
-  }
-
-  const { data: userData, error } = await supabase
-    .from('profiles')
-    .select()
-    .eq('id', user.id)
-    .single();
-
-  if (error) {
-    console.error('Error fetching user role:', error);
-    return user;
-  }
-
-  return {
-    ...user,
-    profile: userData,
-  };
-} */
 
 export async function getUser() {
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error) {
+  const res = await fetch(`${process.env.API_URL}/users/current`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!res.ok) {
     return null;
   }
+  const data = await res.json();
   return data.user;
 }
 
 export async function getCourses() {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('courses')
-    .select('*, profiles(first_name, last_name)');
-  if (error) {
-    return error;
+  const res = await fetch(`${process.env.API_URL}/courses`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch courses');
   }
-  return data;
+  const data = await res.json();
+  return data.data;
 }
 
 export async function getTeachers() {
-  const supabase = createClient();
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
 
-  const { error, data } = await supabase
-    .from('profiles')
-    .select()
-    .eq('role', 'teacher');
-
-  if (error) {
-    throw error;
+  const res = await fetch(`${process.env.API_URL}/users/teachers`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!res.ok) {
+    return { error: 'Failed to fetch teachers', data: [] };
   }
-
-  return data;
+  const data = await res.json();
+  return data.data;
 }

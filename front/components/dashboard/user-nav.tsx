@@ -24,7 +24,7 @@ import { logout } from '@/data-access/data';
 import { User as SupaUserProps } from '@supabase/supabase-js';
 import LogoutButton from './logout-button';
 
-export function UserNav({ user }: { user: SupaUserProps }) {
+export function UserNav({ user }: { user: any }) {
   return (
     <DropdownMenu>
       <TooltipProvider disableHoverableContent>
@@ -38,8 +38,8 @@ export function UserNav({ user }: { user: SupaUserProps }) {
                 <Avatar className='h-8 w-8'>
                   <AvatarImage src='#' alt='Avatar' />
                   <AvatarFallback className='bg-transparent'>
-                    {user?.user_metadata?.first_name.charAt(0)}
-                    {user?.user_metadata?.last_name.charAt(0)}
+                    {user?.first_name.charAt(0)}
+                    {user?.last_name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -52,7 +52,7 @@ export function UserNav({ user }: { user: SupaUserProps }) {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>{`${user?.user_metadata?.first_name} ${user?.user_metadata?.last_name}`}</p>
+            <p className='text-sm font-medium leading-none'>{`${user?.first_name} ${user?.last_name}`}</p>
             <p className='text-xs leading-none text-muted-foreground'>
               {user?.email}
             </p>

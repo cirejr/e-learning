@@ -8,7 +8,7 @@ export default async function Posts() {
   const posts = await getPostsWithRepliesCount();
   return (
     <div className='space-y-4'>
-      {posts.map((post, index) => (
+      {posts.map((post: any, index: number) => (
         <Card key={index}>
           <CardContent className='p-6'>
             <div className='flex items-start justify-between'>
@@ -21,7 +21,7 @@ export default async function Posts() {
                 </Link>
                 <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                   <span>
-                    By {post.profiles.first_name} {post.profiles.last_name}
+                    By {post.author_first_name} {post.author_last_name}
                   </span>
                   <span>·</span>
                   <span>{intlFormat(post.post_created_at)}</span>
@@ -33,7 +33,7 @@ export default async function Posts() {
             </div>
             <div className='mt-4 flex items-center gap-2'>
               <span className='rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary'>
-                {post.forum_topics.title}
+                {post.title}
               </span>
             </div>
           </CardContent>

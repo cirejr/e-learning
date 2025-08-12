@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 export async function Programs() {
   const programs = await getPrograms();
+  console.log(programs);
   return (
     <section className='bg-muted py-24'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -22,12 +23,12 @@ export async function Programs() {
           </p>
         </div>
         <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-          {programs.map((program, index) => (
+          {programs.map((program: any, index: any) => (
             <Card key={index} className='overflow-hidden'>
               <div className='relative aspect-video'>
                 <Image
                   fill
-                  src={program.image_url}
+                  src={''}
                   alt={program.title}
                   className='absolute inset-0 h-full w-full object-cover'
                 />

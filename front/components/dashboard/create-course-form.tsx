@@ -48,7 +48,7 @@ export default function CourseCreationForm({
   teachers,
 }: {
   course?: Course;
-  teachers: User[];
+  teachers: any;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -93,6 +93,11 @@ export default function CourseCreationForm({
         //@ts-ignore
         toast.error(res.error.message as string);
       }
+
+      form.reset();
+      setFiles(null);
+      setDate(undefined);
+      closeRef.current?.click();
     } catch (error) {
       toast.error(
         course
@@ -219,13 +224,13 @@ export default function CourseCreationForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {teachers.map((teach) => (
+                  {teachers.map((teach: any) => (
                     <SelectItem
                       key={teach.id}
                       className='capitalize'
                       id={teach.id}
                       value={teach.id}
-                    >{`${teach.user_metadata.first_name} ${teach.user_metadata.last_name}`}</SelectItem>
+                    >{`${teach.first_name} ${teach.last_name}`}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -234,6 +239,7 @@ export default function CourseCreationForm({
             </FormItem>
           )}
         />
+        {/* 
 
         <FormField
           control={form.control}
@@ -257,9 +263,9 @@ export default function CourseCreationForm({
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name='thumbnail_url'
           render={({ field }) => (
@@ -303,7 +309,7 @@ export default function CourseCreationForm({
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <Button type='submit' disabled={isSubmitting}>
           {isSubmitting ? (
             <Icons.loader className='animate-spin' />

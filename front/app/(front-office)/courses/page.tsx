@@ -5,46 +5,6 @@ import { Pagination } from './_components/pagination';
 import { Course } from '@/lib/definitions/course';
 import { getCourses } from '@/data-access/data';
 
-/* const courses = [
-  {
-    id: 1,
-    title: 'Introduction to Journalism',
-    description:
-      'Learn the fundamentals of journalism, from news writing to investigative reporting.',
-    duration: '12 weeks',
-    level: 'beginner',
-    category: 'journalism',
-    instructor: 'Dr. Sarah Johnson',
-    image:
-      'https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 2,
-    title: 'Digital Media Production',
-    description:
-      'Master the tools and techniques of digital content creation and distribution.',
-    duration: '16 weeks',
-    level: 'intermediate',
-    category: 'digital media',
-    instructor: 'Prof. Michael Chen',
-    image:
-      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 3,
-    title: 'Broadcasting Fundamentals',
-    description:
-      'Develop expertise in television, radio, and podcast production.',
-    duration: '14 weeks',
-    level: 'beginner',
-    category: 'broadcasting',
-    instructor: 'Emily Rodriguez',
-    image:
-      'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  // Add more courses as needed
-]; */
-
 const ITEMS_PER_PAGE = 9;
 
 export default async function CoursesPage() {

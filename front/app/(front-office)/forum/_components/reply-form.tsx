@@ -38,8 +38,14 @@ export default function ReplyForm({
   async function onSubmit(data: z.infer<typeof commentSchema>) {
     setIsLoading(true);
     try {
-      await postComment(data, userId, postId);
-      toast.success('Commentaire posté avec succès !');
+      const res = await postComment(data, userId, postId);
+      if (res?.error) {
+        toast.error(
+          `Erreur lors de la publication du commentaire ! ${res.error}`
+        );
+      } else {
+        toast.success('Commentaire posté avec succès !');
+      }
     } catch (error) {
       toast.error('Erreur lors de la publication du commentaire !');
     } finally {

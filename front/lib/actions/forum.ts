@@ -1,29 +1,38 @@
 'use server';
 
 import { z } from 'zod';
-import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import {
   commentSchema,
   forumPostSchema,
 } from '@/app/(front-office)/forum/_components/schemas';
+import { getAccessToken } from '@/data-access/data';
 
 export async function postComment(
   commentData: z.infer<typeof commentSchema>,
   authorId: string,
   postId: string
 ) {
-  console.log('authorId', authorId);
-  console.log('postId', postId);
-  const supabase = createClient();
-  const { error } = await supabase.from('forum_comments').insert({
-    content: commentData.content,
-    author_id: authorId,
-    post_id: postId,
-  });
-  if (error) {
-    console.log('error in post comment', error);
-    throw error;
+  const accessToken = await getAccessToken();
+
+  const res = await fetch(
+    `${process.env.API_URL}/forum/posts/comments/create`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        ...commentData,
+        author_id: authorId,
+        post_id: postId,
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    return { error: res.statusText };
   }
 
   revalidatePath('/forum/posts/[slug]', 'page');
@@ -33,18 +42,22 @@ export async function createPost(
   postData: z.infer<typeof forumPostSchema>,
   authorId: string
 ) {
-  const supabase = createClient();
+  const accessToken = await getAccessToken();
 
-  const { error } = await supabase.from('forum_posts').insert({
-    title: postData.title,
-    content: postData.content,
-    topic_id: postData.topic_id,
-    author_id: authorId,
+  const res = await fetch(`${process.env.API_URL}/forum/posts/create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      ...postData,
+      author_id: authorId,
+    }),
   });
 
-  if (error) {
-    console.log('error in create post', error);
-    throw error;
+  if (!res.ok) {
+    return { message: res.statusText };
   }
 
   revalidatePath('/forum', 'page');

@@ -1,12 +1,17 @@
-import { createClient } from '@/utils/supabase/server';
-
 export default async function getPrograms() {
-  const supabase = createClient();
+  const url = `${process.env.API_URL}/courses/programs`;
 
-  const { data, error } = await supabase.from('program').select('*');
+  console.log(url);
+  const data = await fetch(url, {
+    method: 'GET',
+  });
 
-  if (error) {
-    throw error;
+  console.log(data);
+
+  if (!data.ok) {
+    throw new Error('Failed to fetch programs');
   }
-  return data;
+
+  const programs = await data.json();
+  return programs.data;
 }

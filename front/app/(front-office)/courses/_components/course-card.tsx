@@ -7,14 +7,14 @@ import { formatDate } from 'date-fns';
 import LearnMore from '@/app/(template)/template/_components/learn-more';
 import Image from 'next/image';
 
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({ course }: { course: any }) {
   return (
     <Card className='flex flex-col overflow-hidden'>
       <div className='relative aspect-video'>
         <Link href={`/courses/${course.code}?id=${course.id}`}>
           <Image
             fill
-            src={course.thumbnail_url}
+            src={''}
             alt={course.title}
             className='absolute inset-0 h-full w-full object-cover'
           />
@@ -35,7 +35,7 @@ export function CourseCard({ course }: { course: Course }) {
           <div className='flex items-center gap-2 text-sm'>
             <Users className='h-4 w-4 text-muted-foreground' />
             <span>
-              {course.profiles.first_name} {course.profiles.last_name}
+              {course.teacher_first_name} {course.teacher_last_name}
             </span>
           </div>
         </div>

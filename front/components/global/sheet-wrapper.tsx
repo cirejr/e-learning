@@ -28,12 +28,14 @@ export default function SheetWrapper({
       <SheetTrigger asChild>
         <Button>{triggerTitle}</Button>
       </SheetTrigger>
-      <SheetContent className='min-w-[600px] px-0'>
-        <SheetHeader className='px-6 pt-0'>
-          <SheetTitle>{title}</SheetTitle>
-        </SheetHeader>
-        <Separator className='my-4 w-full' />
-        {children}
+      <SheetContent className='min-w-[600px] px-0 py-0'>
+        <ScrollArea className='h-full py-2.5'>
+          <SheetHeader className='px-6 pt-0'>
+            <SheetTitle>{title}</SheetTitle>
+          </SheetHeader>
+          <Separator className='my-4 w-full' />
+          {children}
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   );

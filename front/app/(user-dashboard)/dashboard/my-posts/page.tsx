@@ -15,7 +15,7 @@ export default async function MyPosts() {
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Mes Publications'>
       <main>
         {posts.length > 0 ? (
-          posts.map((post, index) => (
+          posts.map((post: any, index: number) => (
             <Card key={index}>
               <CardContent className='p-6'>
                 <div className='flex items-start justify-between'>
@@ -28,7 +28,7 @@ export default async function MyPosts() {
                     </Link>
                     <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                       <span>
-                        By {post.profiles.first_name} {post.profiles.last_name}
+                        By {post.first_name} {post.last_name}
                       </span>
                       <span>·</span>
                       {/* <span>{intlFormat(post.post_created_at)}</span> */}

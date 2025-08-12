@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getCourseById } from '@/data-access/courses';
-import { formatDate } from 'date-fns';
+import { format, formatDate } from 'date-fns';
 import { Course } from '@/lib/definitions/course';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
@@ -35,13 +35,14 @@ export default async function CourseDetails({
   const [course, authedUser] = (await Promise.all([
     getCourseById(searchParams.id as string),
     getUser(),
-  ])) as [Course, User];
+  ])) as [any, User];
+  console.log('course', course);
 
   let isAuthedUser = false;
   if (
     authedUser != null &&
     course.enrollments.some(
-      (enrollment) => enrollment.student_id === authedUser.id
+      (enrollment: any) => enrollment.student_id === authedUser.id
     )
   ) {
     isAuthedUser = true;
@@ -61,7 +62,7 @@ export default async function CourseDetails({
               <div className='relative h-64 w-full md:aspect-video'>
                 <Image
                   fill
-                  src={course.thumbnail_url}
+                  src={''}
                   alt={course.title}
                   className='mb-6 h-64 w-full rounded-lg object-cover'
                 />
@@ -78,25 +79,39 @@ export default async function CourseDetails({
                 <div className='flex items-center'>
                   <Calendar className='mr-2 h-5 w-5 text-teal-600' />
                   <span>
-                    {formatDate(new Date(course.start_date), 'dd/MM/yyyy')}
+                    {new Date(course.start_date).toLocaleDateString('fr-FR', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    })}
                   </span>
                 </div>
                 <div className='flex items-center'>
                   <Clock className='mr-2 h-5 w-5 text-teal-600' />
-                  <span>{course.duration}</span>
+                  <span>
+                    {new Date(course.start_date).toLocaleTimeString('fr-FR', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                    -{' '}
+                    {new Date(course.end_date).toLocaleTimeString('fr-FR', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </span>
                 </div>
                 <div className='flex items-center'>
                   <Users className='mr-2 h-5 w-5 text-teal-600' />
-                  <span>{course.enrollments.length} étudiants</span>
+                  <span>{course?.enrollments?.length} étudiants</span>
                 </div>
               </div>
-              {course?.module.length > 0 && (
+              {course?.modules?.length > 0 && (
                 <>
                   <h3 className='mb-4 text-xl font-semibold'>
                     Programme du cours
                   </h3>
                   <ul className='list-disc space-y-2 pl-5'>
-                    {course?.module.map((module, index) => (
+                    {course?.modules.map((module: any, index: number) => (
                       <li key={index}>
                         <div className='flex items-center space-x-2'>
                           <span>{module.title}</span>
@@ -138,17 +153,17 @@ export default async function CourseDetails({
                 <div className='flex items-center space-x-4'>
                   <Avatar>
                     <AvatarImage
-                      src={course.profiles.avatar_url}
-                      alt={`${course.profiles.first_name} ${course.profiles.last_name}`}
+                      src={course?.profiles?.avatar_url}
+                      alt={`${course.teacher_first_name} ${course.teacher_last_name}`}
                     />
                     <AvatarFallback>
-                      {course.profiles.first_name[0]}
-                      {course.profiles.last_name[0]}
+                      {course.teacher_first_name.charAt(0).toUpperCase()}
+                      {course.teacher_last_name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className='font-medium'>
-                      {course.profiles.first_name} {course.profiles.last_name}
+                    <p className='font-medium capitalize'>
+                      {course.teacher_first_name} {course.teacher_last_name}
                     </p>
                     <p className='text-sm text-gray-500'>Professeur</p>
                   </div>
