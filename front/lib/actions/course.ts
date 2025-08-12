@@ -5,32 +5,34 @@ import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { courseSchema } from '../schemas/course';
 import { generateCourseCode } from '../utils';
+import { getAccessToken } from '@/data-access/data';
 
 const supabase = createClient();
 
 export async function createCourse(courseData: z.infer<typeof courseSchema>) {
+  const accessToken = await getAccessToken();
+
   const dataToSend = {
     code: generateCourseCode(courseData.title),
     ...courseData,
   };
   try {
-    const { data, error } = await supabase
-      .from('courses')
-      .insert({
-        title: courseData.title,
-        description: courseData.description,
-        url: courseData.url,
-        code: dataToSend?.code,
-        start_date: courseData.start_date,
-        end_date: courseData.end_date,
-        teacher_id: courseData.teacher_id,
-      })
-      .select()
-      .single();
+    const res = await fetch(`${process.env.API_URL}/courses/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(dataToSend),
+    });
 
-    if (error) throw error;
+    console.log('res:', res);
 
-    return { success: true };
+    if (res.ok) {
+      return { success: true, message: 'Course created successfully' };
+    } else {
+      return { message: res.statusText };
+    }
   } catch (error) {
     return { error: error };
   } finally {
@@ -73,10 +75,22 @@ export async function updateCourse(
 }
 
 export async function deleteCourse(courseId: number | string) {
-  try {
-    const res = await supabase.from('courses').delete().eq('id', courseId);
+  const accessToken = await getAccessToken();
 
-    return res;
+  try {
+    const res = await fetch(`${process.env.API_URL}/courses/${courseId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (res.ok) {
+      return { success: true, message: 'Course deleted successfully' };
+    } else {
+      return { message: res.statusText };
+    }
   } catch (error) {
     return error;
   } finally {

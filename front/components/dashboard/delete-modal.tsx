@@ -23,7 +23,7 @@ export function DeleteModal({ deleteFn }: { deleteFn: () => void }) {
     try {
       const res = await deleteFn();
       //@ts-ignore
-      if (res?.status == 204) {
+      if (res?.success) {
         toast.success('Suppression réussie');
         setIsLoading(false);
       } else {
@@ -43,7 +43,7 @@ export function DeleteModal({ deleteFn }: { deleteFn: () => void }) {
       <AlertDialogTrigger asChild>
         <Button
           variant='ghost'
-          className='w-full flex justify-start px-2 font-normal'
+          className='flex w-full justify-start px-2 font-normal'
         >
           Supprimer
         </Button>

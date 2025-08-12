@@ -14,8 +14,9 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  const post = (await getPostById(params.slug)) as Post;
+  const post = await getPostById(params.slug);
   const user = await getUser();
+
   return (
     <div className='container py-8 lg:max-w-6xl'>
       <div className='mb-6'>
@@ -41,11 +42,11 @@ export default async function PostPage({
                       alt={post.author.name}
                     /> */}
                     <AvatarFallback>
-                      {post.profiles.last_name[0]}
+                      {post.author_first_name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <span>
-                    {post.profiles.first_name} {post.profiles.last_name}
+                    {post.author_first_name} {post.author_last_name}
                   </span>
                 </div>
                 <span>•</span>
@@ -54,7 +55,7 @@ export default async function PostPage({
                 </span>
                 <span>•</span>
                 <span className='rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
-                  {post.forum_topics.title}
+                  {post.topic_title}
                 </span>
               </div>
             </div>
@@ -77,7 +78,7 @@ export default async function PostPage({
         {/* Replies */}
         <div className='space-y-6'>
           <h2 className='text-lg font-semibold'>Réponses</h2>
-          {post.forum_comments.map((reply) => (
+          {post.comments.map((reply: any) => (
             <Card key={reply.id}>
               <CardContent className='p-6'>
                 <div className='mb-4 flex items-center gap-4'>
@@ -87,12 +88,12 @@ export default async function PostPage({
                       alt={reply.author.name}
                     /> */}
                     <AvatarFallback>
-                      {reply.profiles.last_name[0]}
+                      {reply.author_last_name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
                     <div className='font-medium'>
-                      {reply.profiles.first_name} {reply.profiles.last_name}
+                      {reply.author_first_name} {reply.author_last_name}
                     </div>
                     <div className='text-sm text-muted-foreground'>
                       {formatDate(reply.created_at, 'hh:mm')}

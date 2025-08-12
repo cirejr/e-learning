@@ -5,6 +5,6 @@ export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   formType: 'user' | 'course';
-  teachers?: User[];
+  teachers?: any;
   isStudent?: boolean;
 }

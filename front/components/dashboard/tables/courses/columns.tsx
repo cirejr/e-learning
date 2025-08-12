@@ -21,14 +21,14 @@ import { Course } from '@/lib/definitions/course';
 import { deleteCourse } from '@/lib/actions/course';
 
 /* const nameAccessor = (row: any) => {
-  let firstName = row.profiles.first_name;
-  let lastName = row.profiles.last_name;
+  let firstName = row.first_name;
+  let lastName = row.last_name;
 
   console.log(row);
   return `${firstName} ${lastName}`;
 }; */
 
-export const columns: ColumnDef<Course>[] = [
+export const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => (
@@ -64,17 +64,6 @@ export const columns: ColumnDef<Course>[] = [
     ),
     cell: ({ row }) => <div>{row.getValue('duration')}</div>,
   },
-  /*  {
-    accessorFn: nameAccessor,
-    id: 'name',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Nom' />
-    ),
-    cell: ({ row }) => {
-      const value = nameAccessor(row.original);
-      return <p>{value}</p>;
-    },
-  }, */
   {
     accessorKey: 'profiles',
     header: ({ column }) => (
@@ -83,7 +72,7 @@ export const columns: ColumnDef<Course>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          {row.original.profiles.first_name} {row.original.profiles.last_name}
+          {row.original.teacher_first_name} {row.original.teacher_last_name}
         </div>
       );
     },

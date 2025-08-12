@@ -38,6 +38,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     formData.append('password', data.password);
 
     const res = await login(formData);
+    console.log('res', res);
     if (res.success) {
       toast.success('connecté(e)');
 

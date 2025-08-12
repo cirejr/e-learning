@@ -42,8 +42,7 @@ export async function updateSession(request: NextRequest) {
     // If the user is logged in and tries to access the login page, redirect to appropriate dashboard
 
     const url = request.nextUrl.clone();
-    url.pathname =
-      user.user_metadata.role === 'admin' ? '/admin' : '/dashboard';
+    url.pathname = user.role === 'admin' ? '/admin' : '/dashboard';
     return NextResponse.redirect(url);
   }
 
@@ -55,14 +54,14 @@ export async function updateSession(request: NextRequest) {
     }
 
     // If the user is trying to access /admin and they're not an admin
-    if (isAdminPage && user.user_metadata.role !== 'admin') {
+    if (isAdminPage && user.role !== 'admin') {
       const url = request.nextUrl.clone();
       url.pathname = '/dashboard'; // Redirect to dashboard if not admin
       return NextResponse.redirect(url);
     }
 
     // If an admin is trying to access regular dashboard, redirect to admin dashboard
-    if (isDashboardPage && user.user_metadata.role === 'admin') {
+    if (isDashboardPage && user.role === 'admin') {
       const url = request.nextUrl.clone();
       url.pathname = '/admin/'; // Redirect to admin dashboard
       return NextResponse.redirect(url);

@@ -9,15 +9,12 @@ import { User } from '@supabase/supabase-js';
 import { getEnrolledCourses, getTeacherCourses } from '@/data-access/courses';
 
 export default async function Courses() {
-  const [teachers, courses] = (await Promise.all([
-    getTeachers(),
-    getCourses(),
-  ])) as [User[], Course[]];
+  const [teachers, courses] = await Promise.all([getTeachers(), getCourses()]);
   return (
     <ContentLayout breadcrumb={<Breadcrumbs />} title='Mes Cours'>
       {(user: User) => (
         <main>
-          {user.user_metadata.role == 'teacher' ? (
+          {user.role == 'teacher' ? (
             <TeacherCourses teachers={teachers} userId={user.id} />
           ) : (
             <StudentCourses teachers={teachers} userId={user.id} />

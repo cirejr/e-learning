@@ -41,9 +41,9 @@ export default function ModalForm({
           Ajouter un {formType == 'user' ? 'utilisateur' : 'cours'}
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-h-[800px] overflow-scroll py-7'>
+      <AlertDialogContent className='min-h-[100vh] overflow-y-scroll py-7'>
         <AlertDialogHeader>
-          <div className='flex items-center justify-between'>
+          <div className='flex h-full items-center justify-between'>
             <AlertDialogTitle>
               Ajouter un {formType == 'user' ? 'utilisateur' : 'cours'}
             </AlertDialogTitle>

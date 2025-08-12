@@ -7,6 +7,8 @@ import SheetWrapper from '@/components/global/sheet-wrapper';
 
 export default async function ForumPage() {
   const [user, topics] = await Promise.all([getUser(), getForumTopics()]);
+  console.log('user', user);
+  console.log('topics', topics);
   return (
     <div className='min-h-screen bg-background'>
       {/* Section Hero */}

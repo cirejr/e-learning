@@ -1,6 +1,8 @@
 'use server';
 
 import { createClient } from '@/utils/supabase/server';
+import { cookies } from 'next/headers';
+import { getAccessToken } from './data';
 
 export async function fetchCourses({
   page,
@@ -48,51 +50,48 @@ export async function fetchCourses({
 }
 
 export async function getCourseById(id: string) {
-  const supabase = createClient();
+  const res = await fetch(`${process.env.API_URL}/courses/${id}`);
 
-  const { data, error } = await supabase
-    .from('courses')
-    .select(
-      '*, profiles(first_name, last_name), module(*), enrollments(student_id)'
-    )
-    .eq('id', id);
-
-  if (error) {
-    throw error;
+  if (!res.ok) {
+    return { error: 'Failed to fetch course', data: null };
   }
 
-  return data.length > 0 ? data[0] : null;
+  const data = await res.json();
+  return data.data;
 }
 
 export async function getEnrolledCourses(studentId: string) {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from('enrollments')
-    .select(
-      'courses(title, description, start_date, duration, code, profiles(first_name, last_name))'
-    )
-    .eq('student_id', studentId);
-
-  if (error) {
-    throw error;
+  const accessToken = await getAccessToken();
+  const res = await fetch(
+    `${process.env.API_URL}/enrollments/student/${studentId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  if (!res.ok) {
+    return { error: 'Failed to fetch courses', data: [] };
   }
-
-  const courses = data?.map((enrollment) => enrollment.courses) || [];
-
-  return courses;
+  const data = await res.json();
+  return data.data.length > 0 ? data.data : null;
 }
 
 export async function getTeacherCourses(teacherId: string) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from('courses')
-    .select('*')
-    .eq('teacher_id', teacherId);
-
-  if (error) {
-    throw error;
+  const accessToken = await getAccessToken();
+  const res = await fetch(
+    `${process.env.API_URL}/courses/teacher/${teacherId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  if (!res.ok) {
+    return { error: 'Failed to fetch courses', data: [] };
   }
-
-  return data.length > 0 ? data : null;
+  const data = await res.json();
+  return data.data.length > 0 ? data.data : null;
 }
