@@ -57,7 +57,7 @@ export async function createPost(
   });
 
   if (!res.ok) {
-    return { message: res.statusText };
+    return { error: res.statusText };
   }
 
   revalidatePath('/forum', 'page');

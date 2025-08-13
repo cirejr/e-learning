@@ -8,7 +8,6 @@ import Image from 'next/image';
 
 export async function Programs() {
   const programs = await getPrograms();
-  console.log(programs);
   return (
     <section className='bg-muted py-24'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>

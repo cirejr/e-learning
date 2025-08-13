@@ -56,7 +56,16 @@ export default function ForumPostCreation({
   const onSubmit = async (data: ForumPost) => {
     setIsLoading(true);
     try {
-      await createPost(data, authorId as string);
+      const res = await createPost(data, authorId as string);
+      if (res?.error) {
+        toast.error(
+          'Impossible de publier votre message. Veuillez réessayer.',
+          {
+            description: res?.error,
+          }
+        );
+        return;
+      }
       toast.success('Votre message a été publié avec succès.');
       form.reset();
       closeRef.current?.click();

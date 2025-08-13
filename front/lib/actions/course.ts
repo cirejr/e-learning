@@ -26,8 +26,6 @@ export async function createCourse(courseData: z.infer<typeof courseSchema>) {
       body: JSON.stringify(dataToSend),
     });
 
-    console.log('res:', res);
-
     if (res.ok) {
       return { success: true, message: 'Course created successfully' };
     } else {

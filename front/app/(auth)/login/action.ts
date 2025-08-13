@@ -14,7 +14,6 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   };
 
-  console.log('dataToSend', dataToSend);
   try {
     const res = await fetch(`${process.env.API_URL}/auth/login`, {
       method: 'POST',

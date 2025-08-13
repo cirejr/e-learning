@@ -36,7 +36,6 @@ export default async function CourseDetails({
     getCourseById(searchParams.id as string),
     getUser(),
   ])) as [any, User];
-  console.log('course', course);
 
   let isAuthedUser = false;
   if (

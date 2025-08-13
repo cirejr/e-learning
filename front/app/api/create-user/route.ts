@@ -22,7 +22,6 @@ export async function POST(request: Request) {
     });
 
     const data = await res.json();
-    console.log('data', data);
 
     const name = userData.first_name + ' ' + userData.last_name;
 
